@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Practice identifying Japan’s regional power-company plates on an interactive map.">
+  <meta name="theme-color" content="#f6f3ed">
+  <title>Japan Pole Plate Quiz</title>
+  <link rel="stylesheet" href="../brazil-phone-code-quiz/quiz.css?v=3">
+  <link rel="stylesheet" href="./japan.css">
+  <script src="./plate-data.js" defer></script>
+  <script src="./plate-art.js" defer></script>
+  <script src="./japan.js" defer></script>
+</head>
+<body>
+  <main class="page">
+    <nav class="practice-nav" aria-label="Practice navigation">
+      <a href="../geoguessr/"><span aria-hidden="true">←</span> GeoGuessr practice</a>
+      <button class="sheet-trigger" id="open-reference" type="button" aria-haspopup="dialog" aria-controls="reference">Answer sheet</button>
+    </nav>
+
+    <header class="page-header">
+      <div>
+        <h1><span class="flag" aria-hidden="true"></span>Japan pole plate quiz</h1>
+        <p>Recognize Japan’s regional power companies by the plates on their poles.</p>
+      </div>
+      <div class="progress" id="progress" hidden>
+        <div class="progress-label">
+          <label for="progress-bar">Progress</label>
+          <span id="progress-count"></span>
+        </div>
+        <progress id="progress-bar" value="0"></progress>
+      </div>
+    </header>
+
+    <div class="plate-quiz">
+      <section class="plate-card" aria-labelledby="question">
+        <h2 id="question" tabindex="-1">Which region does this plate suggest?</h2>
+        <canvas class="plate-art" id="plate" width="760" height="480" role="img" aria-label="Pole plate illustration"></canvas>
+      </section>
+
+      <section class="region-card" aria-label="Choose a region">
+        <svg id="region-map" viewBox="0 0 760 560" aria-hidden="true"></svg>
+        <div class="region-options" id="regions" aria-label="Japan power regions"></div>
+      </section>
+
+      <section class="answer-panel plate-feedback" aria-label="Question feedback">
+        <div class="feedback" id="feedback" role="status" aria-atomic="true" data-tone="neutral">
+          <span class="feedback-icon" id="feedback-icon" aria-hidden="true">⌖</span>
+          <div>
+            <p class="feedback-title" id="feedback-title">Loading the map</p>
+            <p class="feedback-detail" id="feedback-detail"></p>
+          </div>
+        </div>
+        <a class="field-link" id="field-example" target="_blank" rel="noopener" hidden>See a field example <span aria-hidden="true">↗</span></a>
+        <button class="advance" id="advance" type="button" aria-describedby="feedback-title feedback-detail" disabled>
+          <span id="advance-label">Next plate</span><span aria-hidden="true">→</span>
+        </button>
+      </section>
+    </div>
+
+    <noscript><p>Enable JavaScript to play the quiz.</p></noscript>
+
+    <footer class="sources">
+      <p>The illustrated plates use fictional pole numbers. The map shows approximate practice regions.</p>
+      <a href="https://www.plonkit.net/japan">Plonk It Japan</a>
+      <a href="https://www.ntt-east.co.jp/contact/pdf/miwakekata.pdf">NTT East plate photos</a>
+      <a href="https://www.occto.or.jp/en/assets/en/information_disclosure/report_on_the_quality/of_electricity_supply_data_for_fy2024/2024_qualityofelectricity_260113.pdf">OCCTO utility areas</a>
+      <a href="https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/">Natural Earth map data</a>
+    </footer>
+  </main>
+
+  <dialog class="plate-reference" id="reference" aria-labelledby="reference-title">
+    <div class="reference-header">
+      <h2 id="reference-title">Answer sheet</h2>
+      <form method="dialog"><button class="sheet-trigger" type="submit" autofocus>Close</button></form>
+    </div>
+    <p class="reference-intro">Look for the power-company plate. A pole may also carry an NTT telecom tag.</p>
+    <div class="reference-grid" id="reference-cards"></div>
+  </dialog>
+</body>
+</html>

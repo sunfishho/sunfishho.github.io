@@ -16,3 +16,11 @@
       action: Play quiz
       image: /geoguessr/france.png
       theme: blue
+- title: Utility pole plates
+  aids:
+    - title: Japan
+      detail: 10 regions
+      summary: Use plate shapes and lettering to identify Japan’s regional power companies.
+      url: /japan-pole-plate-quiz/
+      action: Play quiz
+      image: /geoguessr/japan-pole.jpg
