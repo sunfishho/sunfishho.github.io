@@ -1,0 +1,171 @@
+.geo-hub {
+  color: #25332e;
+  padding-block: 8px 22px;
+}
+
+.geo-heading {
+  margin-bottom: 25px;
+}
+
+.geo-heading h1 {
+  margin: 0 0 8px;
+  color: #1c2e25;
+  font: 500 clamp(2.15rem, 6vw, 3.25rem)/1.07 Georgia, serif;
+  letter-spacing: -.042em;
+}
+
+.geo-heading p {
+  margin: 0;
+  color: #4d5d54;
+  font-size: 1.02rem;
+}
+
+.geo-quizzes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.geo-quizzes li {
+  display: flex;
+  min-width: 0;
+}
+
+.geo-card {
+  --map-background: #ecf4ed;
+  --map-dot: #84a99855;
+  --accent: #2b6049;
+  --card-border: #d4dfd5;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: 15px;
+  color: #25332e;
+  background: #fffefa;
+}
+
+.geo-card-france {
+  --map-background: #edf2fa;
+  --map-dot: #7d98c054;
+  --accent: #3b5488;
+  --card-border: #d6deec;
+}
+
+.geo-card:visited {
+  color: #25332e;
+}
+
+.geo-card:hover {
+  border-color: var(--accent);
+  color: #25332e;
+  text-decoration: none;
+}
+
+.geo-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.geo-map {
+  display: grid;
+  min-height: 142px;
+  place-items: center;
+  border-bottom: 1px solid var(--card-border);
+  background-color: var(--map-background);
+  background-image: radial-gradient(circle, var(--map-dot) 1px, transparent 1.2px);
+  background-size: 16px 16px;
+}
+
+.geo-map img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.geo-card-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 9px;
+  padding: 16px 17px;
+}
+
+.geo-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+}
+
+.geo-card-header h2 {
+  margin: 0;
+  color: #25332e;
+  font: 500 1.68rem/1.13 Georgia, serif;
+  letter-spacing: -.025em;
+}
+
+.geo-count {
+  color: #4d5d54;
+  font-size: .76rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+}
+
+.geo-card-copy p {
+  flex: 1;
+  margin: 0 0 5px;
+  color: #4d5d54;
+  font-size: .9rem;
+}
+
+.geo-digits {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.geo-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  color: var(--accent);
+  font-size: .88rem;
+  font-weight: 700;
+}
+
+.geo-card:hover .geo-action,
+.geo-card:focus-visible .geo-action {
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+
+.geo-sources {
+  margin: 16px 0 0;
+  color: #526057;
+  font-size: .75rem;
+}
+
+.geo-sources a,
+.geo-sources a:visited {
+  color: #38544a;
+  text-decoration: underline;
+  text-underline-offset: .16em;
+}
+
+@media (max-width: 540px) {
+  .geo-quizzes {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .geo-heading {
+    margin-bottom: 18px;
+  }
+}

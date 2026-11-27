@@ -39,6 +39,17 @@ button {
   padding-block: 43px 24px;
 }
 
+.practice-nav {
+  margin-bottom: 13px;
+  font-size: .82rem;
+}
+
+.practice-nav a {
+  color: var(--muted);
+  font-weight: 650;
+  text-underline-offset: .18em;
+}
+
 .page-header {
   display: flex;
   align-items: end;

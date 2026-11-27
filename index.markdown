@@ -4,3 +4,7 @@
 
 layout: home
 ---
+
+## [GeoGuessr practice]({{ '/geoguessr/' | relative_url }})
+
+Practice locating Brazilian and French phone prefixes on interactive maps.
