@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Practice the five historic landline prefixes of metropolitan France on an interactive map.">
+  <meta name="theme-color" content="#f5f4ef">
+  <title>France Phone Prefix Quiz</title>
+  <link rel="stylesheet" href="../brazil-phone-code-quiz/quiz.css">
+  <link rel="stylesheet" href="./france.css">
+  <script src="../brazil-phone-code-quiz/quiz.js?v=3" defer></script>
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <div>
+        <h1><span class="flag" aria-hidden="true"></span>France phone prefix quiz</h1>
+        <p>Match five landline prefixes to their historic zones in metropolitan France.</p>
+      </div>
+      <div class="progress" id="progress" hidden>
+        <div class="progress-label">
+          <label for="progress-bar">Progress</label>
+          <span id="progress-count"></span>
+        </div>
+        <progress id="progress-bar" value="0"></progress>
+      </div>
+    </header>
+
+    <div class="quiz">
+      <section class="prompt" aria-labelledby="question">
+        <div class="dial">
+          <span class="dial-label">Landline prefix</span>
+          <span class="code" id="code">–</span>
+        </div>
+        <h2 id="question" tabindex="-1" aria-describedby="code">Where was this prefix used?</h2>
+      </section>
+
+      <section class="map-panel" aria-label="Quiz map">
+        <svg id="map" viewBox="0 0 640 640" role="group" aria-label="Metropolitan France with selectable cities" data-mode="zones">
+          <g id="state-shapes" aria-hidden="true"></g>
+          <g id="guess-zones" aria-hidden="true"></g>
+          <g id="coverage" aria-hidden="true"></g>
+          <g id="state-labels"></g>
+        </svg>
+      </section>
+
+      <section class="answer-panel" aria-label="Question feedback">
+        <div class="feedback" id="feedback" role="status" aria-atomic="true" data-tone="neutral">
+          <span class="feedback-icon" id="feedback-icon" aria-hidden="true">⌖</span>
+          <div>
+            <p class="feedback-title" id="feedback-title">Loading the map</p>
+            <p class="feedback-detail" id="feedback-detail"></p>
+          </div>
+        </div>
+        <button class="advance" id="advance" type="button" aria-describedby="feedback-title feedback-detail" disabled>
+          <span id="advance-label">Next code</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </section>
+    </div>
+
+    <noscript><p>Enable JavaScript to play the quiz.</p></noscript>
+
+    <footer class="sources">
+      <p>Historic zone boundaries are approximate. Since 2023, these prefixes can be assigned anywhere in metropolitan France.</p>
+      <a href="https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/fin-du-decoupage-geographique-des-numeros-fixes-les-nouvelles-regles-en-vigueur.html">Arcep numbering zones</a>
+      <a href="https://www.data.gouv.fr/datasets/contours-administratifs">Boundaries by data.gouv.fr</a>
+      <a href="./map-data.json" download>Map data</a>
+      <a href="https://opendatacommons.org/licenses/odbl/1-0/" rel="license">ODbL 1.0</a>
+    </footer>
+  </main>
+</body>
+</html>

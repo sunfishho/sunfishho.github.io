@@ -1,6 +1,7 @@
 const svgNamespace = "http://www.w3.org/2000/svg";
 const map = document.querySelector("#map");
 const shapes = document.querySelector("#state-shapes");
+const zones = document.querySelector("#guess-zones");
 const coverage = document.querySelector("#coverage");
 const labels = document.querySelector("#state-labels");
 const codeText = document.querySelector("#code");
@@ -16,6 +17,8 @@ const advance = document.querySelector("#advance");
 const advanceLabel = document.querySelector("#advance-label");
 const list = new Intl.ListFormat("en", { type: "conjunction" });
 const states = new Map();
+const usesZones = map.dataset.mode === "zones";
+const questionText = question.textContent;
 
 // Give small states larger tap targets linked to their locations on the map.
 const calloutPositions = {
@@ -33,7 +36,7 @@ let deck = [];
 let position = 0;
 let firstTry = 0;
 let missed = false;
-let wrongState;
+let wrongTarget;
 let phase = "loading";
 
 function svg(tag, attributes = {}, content) {
@@ -47,6 +50,10 @@ function svg(tag, attributes = {}, content) {
 
 function renderMap(data) {
   map.setAttribute("viewBox", data.viewBox);
+  if (usesZones) {
+    renderZoneMap(data);
+    return;
+  }
 
   for (const state of data.states) {
     const shape = svg("g", {
@@ -90,6 +97,39 @@ function renderMap(data) {
   }
 }
 
+function renderZoneMap(data) {
+  for (const region of data.states) {
+    shapes.append(svg("path", { class: "admin-region", d: region.path, "fill-rule": "evenodd" }));
+  }
+
+  for (const zone of data.codes) {
+    zones.append(svg("path", {
+      class: "guess-zone",
+      d: zone.path,
+      "fill-rule": "evenodd",
+      "data-prefix": zone.code,
+    }));
+  }
+
+  for (const city of data.cities) {
+    const label = svg("g", {
+      class: "city",
+      role: "button",
+      tabindex: "0",
+      "aria-label": city.name,
+      "data-city": city.name,
+      "data-prefix": city.code,
+    });
+    const width = Math.max(42, city.name.length * 8.6 + 16);
+    label.append(
+      svg("rect", { x: city.x - 7, y: city.y - 15, width, height: 30 }),
+      svg("circle", { cx: city.x, cy: city.y, r: 3.4 }),
+      svg("text", { x: city.x + 8, y: city.y, dy: ".34em" }, city.name),
+    );
+    labels.append(label);
+  }
+}
+
 function setFeedback(tone, icon, title, detail = "") {
   feedback.dataset.tone = tone;
   feedbackIcon.textContent = icon;
@@ -99,21 +139,25 @@ function setFeedback(tone, icon, title, detail = "") {
 
 function setInteraction(enabled) {
   map.classList.toggle("is-answered", !enabled);
-  for (const { shape } of states.values()) {
+  for (const shape of map.querySelectorAll('[role="button"]')) {
     shape.setAttribute("tabindex", enabled ? "0" : "-1");
     shape.setAttribute("aria-disabled", String(!enabled));
   }
 }
 
-function markWrongState(id, marked) {
-  const { shape, label } = states.get(id);
-  shape.classList.toggle("is-wrong", marked);
-  label.classList.toggle("is-wrong", marked);
+function markWrongGuess(target, marked) {
+  const state = states.get(target.dataset.state);
+  if (state) {
+    state.shape.classList.toggle("is-wrong", marked);
+    state.label.classList.toggle("is-wrong", marked);
+  } else if (target.dataset.city) {
+    target.classList.toggle("is-wrong", marked);
+  }
 }
 
 function clearWrongGuess() {
-  if (wrongState) markWrongState(wrongState, false);
-  wrongState = undefined;
+  if (wrongTarget) markWrongGuess(wrongTarget, false);
+  wrongTarget = undefined;
 }
 
 function updateProgress(completed) {
@@ -135,10 +179,14 @@ function showQuestion() {
   setInteraction(true);
 
   codeText.textContent = deck[position].code;
-  question.textContent = "Which state uses this code?";
+  question.textContent = questionText;
   advance.disabled = true;
   advanceLabel.textContent = "Next code";
-  setFeedback("neutral", "⌖", "Choose a state", "Select a state or its two-letter label on the map.");
+  if (usesZones) {
+    setFeedback("neutral", "⌖", "Choose a location", "Select a spot or a city on the map.");
+  } else {
+    setFeedback("neutral", "⌖", "Choose a state", "Select a state or its two-letter label on the map.");
+  }
 }
 
 function startQuiz() {
@@ -155,20 +203,24 @@ function startQuiz() {
   showQuestion();
 }
 
-function guess(id, keyboard) {
+function guess(target, keyboard) {
   if (phase !== "asking") return;
   const answer = deck[position];
+  const stateId = target.dataset.state;
+  const correct = usesZones ? target.dataset.prefix === answer.code : answer.states.includes(stateId);
   clearWrongGuess();
 
-  if (!answer.states.includes(id)) {
-    wrongState = id;
+  if (!correct) {
+    wrongTarget = target;
     if (!missed) {
       missed = true;
       deck.push(answer);
       updateProgress(position);
     }
-    markWrongState(id, true);
-    setFeedback("wrong", "×", "Try again", `You chose ${states.get(id).name}. This code will also come back at the end.`);
+    markWrongGuess(target, true);
+    const name = target.dataset.city ?? states.get(stateId)?.name;
+    const chosen = name ? `You chose ${name}. ` : "";
+    setFeedback("wrong", "×", "Try again", `${chosen}This code will also come back at the end.`);
     if (!keyboard) feedback.scrollIntoView({ block: "nearest" });
     return;
   }
@@ -177,11 +229,14 @@ function guess(id, keyboard) {
   if (!missed && position < codes.length) firstTry += 1;
   setInteraction(false);
   coverage.replaceChildren(svg("path", { d: answer.path, "fill-rule": "evenodd" }));
-  for (const stateId of answer.states) states.get(stateId).label.classList.add("is-correct");
-
-  const names = list.format(answer.states.map((stateId) => states.get(stateId).name));
   const places = answer.places.length > 0 ? ` Includes ${list.format(answer.places)}.` : "";
-  setFeedback("correct", "✓", "Correct!", `DDD ${answer.code} · ${names}.${places}`);
+  if (usesZones) {
+    setFeedback("correct", "✓", "Correct!", `${answer.code} · ${answer.name}.${places}`);
+  } else {
+    for (const id of answer.states) states.get(id).label.classList.add("is-correct");
+    const names = list.format(answer.states.map((id) => states.get(id).name));
+    setFeedback("correct", "✓", "Correct!", `DDD ${answer.code} · ${names}.${places}`);
+  }
   updateProgress(position + 1);
   advanceLabel.textContent = position + 1 < deck.length ? "Next code" : "See results";
   advance.disabled = false;
@@ -190,16 +245,16 @@ function guess(id, keyboard) {
 }
 
 map.addEventListener("click", (event) => {
-  const target = event.target.closest("[data-state]");
-  if (target) guess(target.dataset.state, false);
+  const target = event.target.closest("[data-state], [data-prefix]");
+  if (target) guess(target, false);
 });
 
 map.addEventListener("keydown", (event) => {
   if (event.key !== "Enter" && event.key !== " ") return;
-  const target = event.target.closest(".state");
+  const target = event.target.closest('[role="button"]');
   if (target) {
     event.preventDefault();
-    guess(target.dataset.state, true);
+    guess(target, true);
   }
 });
 
@@ -243,6 +298,7 @@ async function loadQuiz() {
   } catch (error) {
     console.error(error);
     shapes.replaceChildren();
+    zones?.replaceChildren();
     labels.replaceChildren();
     states.clear();
     phase = "error";

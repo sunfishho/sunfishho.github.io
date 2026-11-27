@@ -1,0 +1,142 @@
+:root {
+  --ink: #22304b;
+  --muted: #4d5d72;
+  --paper: #f5f4ef;
+  --white: #fffefa;
+  --border: #d7dde8;
+  --green: #243c67;
+  --gold: #f6d58b;
+}
+
+:focus-visible {
+  outline-color: #43649c;
+}
+
+.flag {
+  border: 1px solid #3a466324;
+  background: linear-gradient(to right, #24468a 33.33%, #fffefa 33.33% 66.67%, #ce425a 66.67%);
+}
+
+.flag::before,
+.flag::after {
+  display: none;
+}
+
+.dial-label {
+  color: #e0e7fa;
+}
+
+.progress-label {
+  color: #445670;
+}
+
+progress {
+  background: #dde3ef;
+  accent-color: #526da3;
+}
+
+progress::-webkit-progress-bar {
+  background: #dde3ef;
+}
+
+progress::-webkit-progress-value {
+  background: #526da3;
+}
+
+progress::-moz-progress-bar {
+  background: #526da3;
+}
+
+.feedback[data-tone="neutral"] .feedback-icon {
+  background: #e8edf7;
+  color: #3d5a85;
+}
+
+.advance:hover:not(:disabled) {
+  background: #385486;
+}
+
+.advance:disabled {
+  border-color: #e1e5ee;
+  background: #edf0f5;
+  color: #58667b;
+}
+
+.map-panel {
+  border-color: #cfd9e8;
+  background-color: #eaf0f8;
+  background-image: radial-gradient(circle, #768eaf4a 1px, transparent 1.15px);
+}
+
+.admin-region {
+  fill: #c5d5ea;
+  stroke: #5a7297;
+  stroke-width: 1;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.guess-zone {
+  fill: transparent;
+  cursor: pointer;
+}
+
+.city {
+  cursor: pointer;
+}
+
+#map.is-answered :is(.guess-zone, .city) {
+  cursor: default;
+}
+
+.city rect {
+  fill: transparent;
+}
+
+.city circle {
+  fill: #3d5a85;
+  stroke: #f7f9fd;
+  stroke-width: 1.35;
+  pointer-events: none;
+}
+
+.city text {
+  fill: #243858;
+  stroke: #f8faff;
+  stroke-width: 2.35;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  font-size: 13.5px;
+  font-weight: 670;
+  pointer-events: none;
+}
+
+#map:not(.is-answered) .city:is(:hover, :focus-visible) circle,
+#map .city.is-wrong circle {
+  fill: #a74435;
+  stroke: #fffefa;
+  r: 5px;
+}
+
+.city:focus-visible {
+  outline: none;
+}
+
+.city:focus-visible text {
+  text-decoration: underline;
+}
+
+.sources a {
+  color: #3c5685;
+}
+
+.sources p {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+@media (max-width: 730px) {
+  .city text {
+    font-size: 16px;
+  }
+}
