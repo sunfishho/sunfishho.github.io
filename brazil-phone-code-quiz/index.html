@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Practice all 67 Brazilian telephone area codes on an interactive map of Brazil.">
+  <meta name="theme-color" content="#f5f4eb">
+  <title>Brazil Area Code Quiz</title>
+  <link rel="stylesheet" href="./quiz.css">
+  <script src="./quiz.js" defer></script>
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <div>
+        <h1><span class="flag" aria-hidden="true"></span>Brazil area code quiz</h1>
+        <p>Pick a state to see where each area code is used.</p>
+      </div>
+      <div class="progress" id="progress" hidden>
+        <div class="progress-label">
+          <label for="progress-bar">Progress</label>
+          <span id="progress-count"></span>
+        </div>
+        <progress id="progress-bar" value="0"></progress>
+      </div>
+    </header>
+
+    <div class="quiz">
+      <section class="prompt" aria-labelledby="question">
+        <div class="dial">
+          <span class="dial-label">Area code · DDD</span>
+          <span class="code" id="code">–</span>
+        </div>
+        <h2 id="question" tabindex="-1" aria-describedby="code">Which state uses this code?</h2>
+      </section>
+
+      <section class="map-panel" aria-label="Quiz map">
+        <svg id="map" viewBox="0 0 640 640" role="group" aria-label="Brazilian states and the Federal District">
+          <g id="state-shapes"></g>
+          <g id="coverage" aria-hidden="true"></g>
+          <g id="state-labels" aria-hidden="true"></g>
+        </svg>
+      </section>
+
+      <section class="answer-panel" aria-label="Question feedback">
+        <div class="feedback" id="feedback" role="status" aria-atomic="true" data-tone="neutral">
+          <span class="feedback-icon" id="feedback-icon" aria-hidden="true">⌖</span>
+          <div>
+            <p class="feedback-title" id="feedback-title">Loading the map</p>
+            <p class="feedback-detail" id="feedback-detail"></p>
+          </div>
+        </div>
+        <button class="advance" id="advance" type="button" aria-describedby="feedback-title feedback-detail" disabled>
+          <span id="advance-label">Next code</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </section>
+    </div>
+
+    <noscript><p>Enable JavaScript to play the quiz.</p></noscript>
+
+    <footer class="sources">
+      <span>Data</span>
+      <a href="https://informacoes.anatel.gov.br/paineis/areas-tarifarias/codigos-nacionais">Anatel area codes</a>
+      <a href="https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais/15774-malhas.html">IBGE boundaries</a>
+    </footer>
+  </main>
+</body>
+</html>
