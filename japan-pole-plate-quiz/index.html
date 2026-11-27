@@ -7,10 +7,10 @@
   <meta name="theme-color" content="#f6f3ed">
   <title>Japan Pole Plate Quiz</title>
   <link rel="stylesheet" href="../brazil-phone-code-quiz/quiz.css?v=3">
-  <link rel="stylesheet" href="./japan.css">
-  <script src="./plate-data.js" defer></script>
-  <script src="./plate-art.js" defer></script>
-  <script src="./japan.js" defer></script>
+  <link rel="stylesheet" href="./japan.css?v=2">
+  <script src="./plate-data.js?v=2" defer></script>
+  <script src="./plate-art.js?v=2" defer></script>
+  <script src="./japan.js?v=2" defer></script>
 </head>
 <body>
   <main class="page">
@@ -22,7 +22,7 @@
     <header class="page-header">
       <div>
         <h1><span class="flag" aria-hidden="true"></span>Japan pole plate quiz</h1>
-        <p>Recognize Japan’s regional power companies by the plates on their poles.</p>
+        <p>Tell NTT telecom plates apart from Japan’s regional power-company plates.</p>
       </div>
       <div class="progress" id="progress" hidden>
         <div class="progress-label">
@@ -35,7 +35,10 @@
 
     <div class="plate-quiz">
       <section class="plate-card" aria-labelledby="question">
-        <h2 id="question" tabindex="-1">Which region does this plate suggest?</h2>
+        <div class="plate-card-heading">
+          <h2 id="question" tabindex="-1">Which region does the power plate suggest?</h2>
+          <button id="plate-labels" class="plate-labels" type="button" aria-pressed="false" disabled>Plate labels</button>
+        </div>
         <canvas class="plate-art" id="plate" width="760" height="480" role="img" aria-label="Pole plate illustration"></canvas>
       </section>
 
@@ -62,9 +65,10 @@
     <noscript><p>Enable JavaScript to play the quiz.</p></noscript>
 
     <footer class="sources">
-      <p>The illustrated plates use fictional pole numbers. The map shows approximate practice regions.</p>
+      <p>The illustrations show example plate arrangements with fictional numbers. The map shows approximate practice regions.</p>
       <a href="https://www.plonkit.net/japan">Plonk It Japan</a>
       <a href="https://www.ntt-east.co.jp/contact/pdf/miwakekata.pdf">NTT East plate photos</a>
+      <a href="https://www.ntt-ft.jp/contact/pdf/pole_owner.pdf">NTT plate guide</a>
       <a href="https://www.occto.or.jp/en/assets/en/information_disclosure/report_on_the_quality/of_electricity_supply_data_for_fy2024/2024_qualityofelectricity_260113.pdf">OCCTO utility areas</a>
       <a href="https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/">Natural Earth map data</a>
     </footer>
@@ -75,7 +79,12 @@
       <h2 id="reference-title">Answer sheet</h2>
       <form method="dialog"><button class="sheet-trigger" type="submit" autofocus>Close</button></form>
     </div>
-    <p class="reference-intro">Look for the power-company plate. A pole may also carry an NTT telecom tag.</p>
+    <p class="reference-intro">Look for the NTT name on the telecom plate, then read the nearby power-company plate for a regional clue. Plate order and orientation vary.</p>
+    <div class="reference-links" aria-label="Photo guides">
+      <a href="https://www.ntt-east.co.jp/contact/pdf/miwakekata.pdf#page=1" target="_blank" rel="noopener">NTT East paired plates</a>
+      <a href="https://www.ntt-west.co.jp/tenga/faq/" target="_blank" rel="noopener">NTT West paired plates</a>
+      <a href="https://learnablemeta.com/maps/67168e876b79c3cb4f964543" target="_blank" rel="noopener">LearnableMeta field examples, curated by trausi</a>
+    </div>
     <div class="reference-grid" id="reference-cards"></div>
   </dialog>
 </body>

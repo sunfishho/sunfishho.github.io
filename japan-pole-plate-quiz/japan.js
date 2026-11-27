@@ -2,6 +2,8 @@ const plate = document.querySelector("#plate");
 const map = document.querySelector("#region-map");
 const options = document.querySelector("#regions");
 const question = document.querySelector("#question");
+const promptText = question.textContent;
+const plateLabels = document.querySelector("#plate-labels");
 const progress = document.querySelector("#progress");
 const progressBar = document.querySelector("#progress-bar");
 const progressCount = document.querySelector("#progress-count");
@@ -15,7 +17,7 @@ const advanceLabel = document.querySelector("#advance-label");
 const reference = document.querySelector("#reference");
 const referenceButton = document.querySelector("#open-reference");
 const referenceCards = document.querySelector("#reference-cards");
-const regionById = new Map(polePlates.map((entry) => [entry.id, entry]));
+const regionById = new Map(polePlates.filter((entry) => !entry.region).map((entry) => [entry.id, entry]));
 const markers = new Map();
 let deck = [];
 let position = 0;
@@ -42,7 +44,7 @@ function renderMap(data) {
   }
 
   const geometry = new Map(data.regions.map((region) => [region.id, region]));
-  for (const entry of polePlates) {
+  for (const entry of regionById.values()) {
     const { id, name } = entry;
     const region = geometry.get(id);
     const shape = mapNode("path", {
@@ -98,15 +100,20 @@ function setProgress(completed) {
   progressCount.textContent = `${completed} / ${deck.length} complete`;
 }
 
+function paintPlate(entry, reveal) {
+  drawPolePlate(plate, entry.id, { reveal });
+  plate.setAttribute("aria-label", `${entry.description} A separate telecom plate is marked NTT.`);
+  plateLabels?.setAttribute("aria-pressed", String(reveal));
+}
+
 function showPlate() {
   phase = "asking";
   missed = false;
   markRegion();
   lockMap(false);
-  question.textContent = "Which region does this plate suggest?";
-  const clue = deck[position];
-  drawPolePlate(plate, clue.id);
-  plate.setAttribute("aria-label", clue.description);
+  question.textContent = promptText;
+  paintPlate(deck[position], false);
+  if (plateLabels) plateLabels.disabled = false;
   setFeedback("neutral", "⌖", "Choose a region", "Select an area on the map or choose its name.");
   advanceLabel.textContent = "Next plate";
   advance.disabled = true;
@@ -128,7 +135,7 @@ function startRound() {
 function guess(id, keyboard) {
   if (phase !== "asking") return;
   const answer = deck[position];
-  if (answer.id !== id) {
+  if ((answer.region ?? answer.id) !== id) {
     if (!missed) {
       missed = true;
       deck.push(answer);
@@ -144,8 +151,9 @@ function guess(id, keyboard) {
   if (!missed && position < polePlates.length) firstTry += 1;
   lockMap(true);
   markRegion(id, "is-correct");
+  paintPlate(answer, true);
   setProgress(position + 1);
-  setFeedback("correct", "✓", `Correct · ${answer.name}`, `${answer.utility}. ${answer.clue}`, answer.field);
+  setFeedback("correct", "✓", `Correct · ${answer.name}`, `${answer.utility}. ${answer.clue}`, answer.learnablePhoto ?? answer.field);
   advanceLabel.textContent = position + 1 < deck.length ? "Next plate" : "See results";
   advance.disabled = false;
   if (keyboard) advance.focus();
@@ -158,6 +166,10 @@ for (const container of [map, options]) {
     if (target) guess(target.dataset.region, event.detail === 0);
   });
 }
+
+plateLabels?.addEventListener("click", () => {
+  paintPlate(deck[position], plateLabels.getAttribute("aria-pressed") !== "true");
+});
 
 advance.addEventListener("click", () => {
   if (phase === "error") {
@@ -173,42 +185,46 @@ advance.addEventListener("click", () => {
       phase = "complete";
       question.textContent = "Round complete";
       markRegion();
-      setFeedback("correct", "✓", `All ${polePlates.length} regions covered`, `You got ${firstTry} right on the first try.`);
+      if (plateLabels) plateLabels.disabled = true;
+      setFeedback("correct", "✓", `All ${polePlates.length} examples covered`, `You got ${firstTry} right on the first try.`);
       advanceLabel.textContent = "Play again";
     }
     question.focus();
   }
 });
 
+function referenceLink(href, text, label) {
+  const link = document.createElement("a");
+  link.href = href;
+  link.target = "_blank";
+  link.rel = "noopener";
+  link.textContent = `${text} ↗`;
+  if (label) link.setAttribute("aria-label", label);
+  return link;
+}
+
 function addReferenceCards() {
   for (const entry of polePlates) {
     const card = document.createElement("article");
     card.className = "reference-entry";
     const sample = document.createElement("canvas");
-    sample.width = 286;
-    sample.height = 360;
+    sample.width = 760;
+    sample.height = 480;
     sample.setAttribute("aria-hidden", "true");
-    drawPolePlate(sample, entry.id);
+    drawPolePlate(sample, entry.id, { reveal: true });
 
     const copy = document.createElement("div");
     const heading = document.createElement("h3");
-    heading.textContent = entry.name;
+    heading.textContent = entry.referenceTitle ?? entry.name;
     const description = document.createElement("p");
     description.textContent = entry.clue;
-    const example = document.createElement("a");
-    example.href = entry.field;
-    example.target = "_blank";
-    example.rel = "noopener";
-    example.textContent = "Field example ↗";
-    example.setAttribute("aria-label", `Field example for ${entry.name}`);
-    copy.append(heading, description, example);
+    const name = entry.referenceTitle ?? entry.name;
+    copy.append(heading, description, referenceLink(entry.field, "Field example", `Field example for ${name}`));
+    if (entry.learnablePhoto) {
+      copy.append(referenceLink(entry.learnablePhoto, "LearnableMeta photo", `LearnableMeta photo for ${name}`));
+    }
     if (entry.streetView) {
-      const panorama = document.createElement("a");
-      panorama.href = entry.streetView;
-      panorama.target = "_blank";
-      panorama.rel = "noopener";
-      panorama.textContent = "Street View arrow example ↗";
-      copy.append(panorama);
+      copy.append(referenceLink(entry.streetView, "Street View arrow example"));
     }
     card.append(sample, copy);
     referenceCards.append(card);

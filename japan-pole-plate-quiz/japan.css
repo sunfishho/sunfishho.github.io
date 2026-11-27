@@ -59,18 +59,54 @@ progress::-moz-progress-bar {
   background: #dce9e3;
 }
 
+.plate-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px 8px 16px;
+  background: #223c36;
+}
+
 .plate-card h2 {
   margin: 0;
-  padding: 12px 17px;
-  background: #223c36;
   color: var(--white);
   font-size: clamp(.95rem, 2.4vw, 1.13rem);
   font-weight: 650;
 }
 
-.plate-card h2:focus-visible {
+.plate-card-heading :focus-visible {
   outline: 3px solid var(--gold);
-  outline-offset: -6px;
+  outline-offset: 3px;
+}
+
+.plate-labels {
+  flex: none;
+  min-height: 34px;
+  padding: 4px 9px;
+  border: 1px solid #f8f7ec80;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--white);
+  font-size: .78rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.plate-labels:hover:not(:disabled) {
+  border-color: var(--white);
+  background: #f8f7ec20;
+}
+
+.plate-labels[aria-pressed="true"],
+.plate-labels[aria-pressed="true"]:hover:not(:disabled) {
+  border-color: #f5e7c9;
+  background: #f5e7c9;
+  color: #3c3120;
+}
+
+.plate-labels:disabled {
+  cursor: default;
 }
 
 .plate-art {
@@ -243,9 +279,22 @@ progress::-moz-progress-bar {
 }
 
 .reference-intro {
-  margin: 13px 17px;
+  margin: 13px 17px 7px;
   color: var(--muted);
   font-size: .87rem;
+}
+
+.reference-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 14px;
+  margin: 0 17px 13px;
+  font-size: .78rem;
+}
+
+.reference-links a {
+  color: #315b49;
+  text-underline-offset: .18em;
 }
 
 .reference-grid {
@@ -257,9 +306,8 @@ progress::-moz-progress-bar {
 
 .reference-entry {
   display: grid;
-  grid-template-columns: 123px minmax(0, 1fr);
-  align-items: start;
-  gap: 10px;
+  grid-template-rows: max-content 1fr;
+  gap: 8px;
   padding: 10px;
   border: 1px solid var(--border);
   border-radius: 9px;
@@ -267,6 +315,7 @@ progress::-moz-progress-bar {
 }
 
 .reference-entry canvas {
+  display: block;
   width: 100%;
   height: auto;
   border-radius: 5px;
@@ -322,9 +371,5 @@ progress::-moz-progress-bar {
 
   .reference-header {
     padding-inline: 12px;
-  }
-
-  .reference-entry {
-    grid-template-columns: 102px minmax(0, 1fr);
   }
 }
