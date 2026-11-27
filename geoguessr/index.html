@@ -1,52 +1,51 @@
 ---
 layout: default
 title: GeoGuessr
-description: Practice Brazilian and French phone prefixes on interactive maps.
+description: Quizzes and memory aids for learning geographic clues.
 permalink: /geoguessr/
 ---
-<link rel="stylesheet" href="{{ '/geoguessr/hub.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/geoguessr/hub.css' | relative_url }}?v=2">
 
 <section class="geo-hub" aria-labelledby="geo-title">
   <header class="geo-heading">
     <h1 id="geo-title">GeoGuessr practice</h1>
-    <p>Learn where phone prefixes belong by finding them on the map.</p>
+    <p>Study location clues with quizzes and memory aids.</p>
   </header>
 
-  <ul class="geo-quizzes" aria-label="Practice quizzes">
-    <li>
-      <a class="geo-card geo-card-brazil" href="{{ '/brazil-phone-code-quiz/' | relative_url }}" aria-labelledby="geo-brazil-title geo-brazil-action">
-        <div class="geo-map">
-          <img src="{{ '/geoguessr/brazil.png' | relative_url }}" width="600" height="300" alt="" decoding="async">
-        </div>
-        <div class="geo-card-copy">
-          <div class="geo-card-header">
-            <h2 id="geo-brazil-title">Brazil</h2>
-            <span class="geo-count">67 area codes</span>
-          </div>
-          <p>Pick a state to reveal the coverage area for each DDD code.</p>
-          <span class="geo-action" id="geo-brazil-action">Play quiz <span aria-hidden="true">→</span></span>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a class="geo-card geo-card-france" href="{{ '/france-phone-code-quiz/' | relative_url }}" aria-labelledby="geo-france-title geo-france-action">
-        <div class="geo-map">
-          <img src="{{ '/geoguessr/france.png' | relative_url }}" width="600" height="300" alt="" decoding="async">
-        </div>
-        <div class="geo-card-copy">
-          <div class="geo-card-header">
-            <h2 id="geo-france-title">France</h2>
-            <span class="geo-count">5 prefixes</span>
-          </div>
-          <p>Find the historic landline zones for <span class="geo-digits">01–05</span> in metropolitan France.</p>
-          <span class="geo-action" id="geo-france-action">Play quiz <span aria-hidden="true">→</span></span>
-        </div>
-      </a>
-    </li>
-  </ul>
+  {% for category in site.data.geoguessr %}
+    {% assign category_id = 'geo-category-' | append: forloop.index %}
+    <section class="geo-category" aria-labelledby="{{ category_id }}">
+      <h2 id="{{ category_id }}">{{ category.title | escape }}</h2>
+      <ul class="geo-aids">
+        {% for aid in category.aids %}
+          {% assign aid_id = category_id | append: '-aid-' | append: forloop.index %}
+          <li>
+            <a class="geo-card{% if aid.theme %} geo-theme-{{ aid.theme | escape }}{% endif %}"
+               href="{{ aid.url | relative_url }}"
+               aria-labelledby="{{ aid_id }}-title {{ aid_id }}-action"
+               aria-describedby="{{ aid_id }}-summary">
+              {% if aid.image %}
+                <div class="geo-map">
+                  <img src="{{ aid.image | relative_url }}" alt="{{ aid.image_alt | default: '' | escape }}" loading="lazy" decoding="async">
+                </div>
+              {% endif %}
+              <div class="geo-card-copy">
+                <div class="geo-card-header">
+                  <h3 id="{{ aid_id }}-title">{{ aid.title | escape }}</h3>
+                  {% if aid.detail %}<span class="geo-detail">{{ aid.detail | escape }}</span>{% endif %}
+                </div>
+                <p id="{{ aid_id }}-summary">{{ aid.summary | escape }}</p>
+                <span class="geo-action" id="{{ aid_id }}-action">{{ aid.action | default: 'Open aid' | escape }} <span aria-hidden="true">→</span></span>
+              </div>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
 
   <p class="geo-sources">
-    Map outlines from <a href="https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais/15774-malhas.html">IBGE</a> and
+    Phone map outlines from <a href="https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais/15774-malhas.html">IBGE</a> and
     <a href="https://www.data.gouv.fr/datasets/contours-administratifs">data.gouv.fr</a>.
     <a href="{{ '/france-phone-code-quiz/map-data.json' | relative_url }}">France map data</a> is available under
     <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL 1.0</a>.

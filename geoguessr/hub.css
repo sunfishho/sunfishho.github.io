@@ -20,7 +20,18 @@
   font-size: 1.02rem;
 }
 
-.geo-quizzes {
+.geo-category + .geo-category {
+  margin-top: 26px;
+}
+
+.geo-category > h2 {
+  margin: 0 0 10px;
+  color: #25332e;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.geo-aids {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
@@ -29,7 +40,7 @@
   list-style: none;
 }
 
-.geo-quizzes li {
+.geo-aids li {
   display: flex;
   min-width: 0;
 }
@@ -49,7 +60,7 @@
   background: #fffefa;
 }
 
-.geo-card-france {
+.geo-theme-blue {
   --map-background: #edf2fa;
   --map-dot: #7d98c054;
   --accent: #3b5488;
@@ -74,6 +85,7 @@
 .geo-map {
   display: grid;
   min-height: 142px;
+  aspect-ratio: 2;
   place-items: center;
   border-bottom: 1px solid var(--card-border);
   background-color: var(--map-background);
@@ -84,7 +96,8 @@
 .geo-map img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
 }
 
 .geo-card-copy {
@@ -104,14 +117,14 @@
   gap: 2px 12px;
 }
 
-.geo-card-header h2 {
+.geo-card-header h3 {
   margin: 0;
   color: #25332e;
   font: 500 1.68rem/1.13 Georgia, serif;
   letter-spacing: -.025em;
 }
 
-.geo-count {
+.geo-detail {
   color: #4d5d54;
   font-size: .76rem;
   font-weight: 650;
@@ -123,11 +136,6 @@
   margin: 0 0 5px;
   color: #4d5d54;
   font-size: .9rem;
-}
-
-.geo-digits {
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
 }
 
 .geo-action {
@@ -160,7 +168,7 @@
 }
 
 @media (max-width: 540px) {
-  .geo-quizzes {
+  .geo-aids {
     grid-template-columns: minmax(0, 1fr);
     gap: 12px;
   }

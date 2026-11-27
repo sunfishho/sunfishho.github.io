@@ -1,0 +1,18 @@
+# Add an aid to an existing category or add another category below.
+# Each aid needs a title, summary, and site-relative URL.
+# Optional: detail, action, image, image_alt, and theme (blue or default).
+- title: Phone prefixes
+  aids:
+    - title: Brazil
+      detail: 67 area codes
+      summary: Pick a state to reveal the coverage area for each DDD code.
+      url: /brazil-phone-code-quiz/
+      action: Play quiz
+      image: /geoguessr/brazil.png
+    - title: France
+      detail: 5 prefixes
+      summary: Find the historic landline zones for 01–05 in metropolitan France.
+      url: /france-phone-code-quiz/
+      action: Play quiz
+      image: /geoguessr/france.png
+      theme: blue
