@@ -116,9 +116,10 @@ function clearWrongGuess() {
   wrongState = undefined;
 }
 
-function updateProgress(solved) {
-  progressBar.value = solved;
-  progressCount.textContent = `${solved} / ${deck.length} solved`;
+function updateProgress(completed) {
+  progressBar.max = deck.length;
+  progressBar.value = completed;
+  progressCount.textContent = `${completed} / ${deck.length} complete`;
 }
 
 function clearCoverage() {
@@ -149,7 +150,6 @@ function startQuiz() {
 
   position = 0;
   firstTry = 0;
-  progressBar.max = deck.length;
   progress.hidden = false;
   updateProgress(0);
   showQuestion();
@@ -162,15 +162,19 @@ function guess(id, keyboard) {
 
   if (!answer.states.includes(id)) {
     wrongState = id;
-    missed = true;
+    if (!missed) {
+      missed = true;
+      deck.push(answer);
+      updateProgress(position);
+    }
     markWrongState(id, true);
-    setFeedback("wrong", "×", "Try again", `You chose ${states.get(id).name}. Pick another state for DDD ${answer.code}.`);
+    setFeedback("wrong", "×", "Try again", `You chose ${states.get(id).name}. This code will also come back at the end.`);
     if (!keyboard) feedback.scrollIntoView({ block: "nearest" });
     return;
   }
 
   phase = "answered";
-  if (!missed) firstTry += 1;
+  if (!missed && position < codes.length) firstTry += 1;
   setInteraction(false);
   coverage.replaceChildren(svg("path", { d: answer.path, "fill-rule": "evenodd" }));
   for (const stateId of answer.states) states.get(stateId).label.classList.add("is-correct");
@@ -219,7 +223,7 @@ advance.addEventListener("click", () => {
     clearCoverage();
     question.textContent = "Quiz complete";
     codeText.textContent = "✓";
-    setFeedback("correct", "✓", `All ${deck.length} codes solved`, `You got ${firstTry} right on the first try.`);
+    setFeedback("correct", "✓", `All ${codes.length} codes solved`, `You got ${firstTry} right on the first try.`);
     advanceLabel.textContent = "Play again";
   }
   question.focus();
