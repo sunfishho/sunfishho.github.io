@@ -40,6 +40,10 @@ button {
 }
 
 .practice-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
   margin-bottom: 13px;
   font-size: .82rem;
 }
@@ -48,6 +52,26 @@ button {
   color: var(--muted);
   font-weight: 650;
   text-underline-offset: .18em;
+}
+
+.sheet-trigger {
+  min-height: 36px;
+  padding: 6px 11px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--white);
+  color: var(--ink);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.sheet-trigger:hover:not(:disabled) {
+  border-color: var(--muted);
+}
+
+.sheet-trigger:disabled {
+  color: var(--muted);
+  cursor: default;
 }
 
 .page-header {

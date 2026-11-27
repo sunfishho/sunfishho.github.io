@@ -26,6 +26,87 @@
   color: #e0e7fa;
 }
 
+.quiz-options {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin: -7px 0 14px;
+}
+
+.quiz-modes {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #edf0f5;
+}
+
+.quiz-modes a {
+  padding: 7px 9px;
+  border-radius: 6px;
+  color: var(--ink);
+  font-size: .79rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.quiz-modes a span {
+  color: var(--muted);
+  font-size: .72rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.quiz-modes a[aria-current="page"] {
+  background: var(--green);
+  color: var(--white);
+}
+
+.quiz-modes a[aria-current="page"] span {
+  color: #deebff;
+}
+
+.quiz-modes a:hover:not([aria-current]) {
+  background: var(--white);
+}
+
+.group-control {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+:is(.group-control, .department-control) label {
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 650;
+}
+
+:is(.group-control, .department-control) select {
+  min-height: 35px;
+  max-width: 100%;
+  padding: 4px 7px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+  font-size: .82rem;
+}
+
+.department-control {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 12px;
+}
+
+.department-quiz .code {
+  font-size: clamp(2.8rem, 5.9vw, 4.85rem);
+  white-space: nowrap;
+}
+
 .progress-label {
   color: #445670;
 }
@@ -74,6 +155,26 @@ progress::-moz-progress-bar {
   stroke-width: 1;
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
+}
+
+.department-quiz .state path {
+  fill: #c5d5ea;
+  stroke: #5a7297;
+  stroke-width: .9;
+}
+
+.department-quiz .state-label {
+  pointer-events: none;
+}
+
+.department-quiz .state-label text {
+  fill: #243858;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+.department-quiz .state-label:is([data-state="75"], [data-state="92"], [data-state="93"], [data-state="94"]) {
+  display: none;
 }
 
 .guess-zone {
@@ -135,8 +236,24 @@ progress::-moz-progress-bar {
   margin: 0;
 }
 
+body:not(.department-quiz) .detailed-source {
+  display: none;
+}
+
 @media (max-width: 730px) {
   .city text {
     font-size: 16px;
+  }
+
+  .quiz-options {
+    margin-top: 0;
+  }
+
+  .department-quiz .code {
+    font-size: clamp(2.4rem, 10vw, 3.2rem);
+  }
+
+  .department-quiz .state-label {
+    display: none;
   }
 }

@@ -3,22 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Practice the five historic landline prefixes of metropolitan France on an interactive map.">
+  <meta name="description" content="Practice historic two- and four-digit landline prefixes of metropolitan France on an interactive map.">
   <meta name="theme-color" content="#f5f4ef">
   <title>France Phone Prefix Quiz</title>
-  <link rel="stylesheet" href="../brazil-phone-code-quiz/quiz.css?v=2">
-  <link rel="stylesheet" href="./france.css">
-  <script src="../brazil-phone-code-quiz/quiz.js?v=4" defer></script>
+  <link rel="stylesheet" href="../brazil-phone-code-quiz/quiz.css?v=3">
+  <link rel="stylesheet" href="../brazil-phone-code-quiz/answer-sheet.css">
+  <link rel="stylesheet" href="./france.css?v=2">
+  <script src="../brazil-phone-code-quiz/answer-sheet.js" defer></script>
+  <script src="../brazil-phone-code-quiz/quiz.js?v=5" defer></script>
 </head>
 <body>
   <main class="page">
     <nav class="practice-nav" aria-label="Practice navigation">
       <a href="../geoguessr/"><span aria-hidden="true">←</span> GeoGuessr practice</a>
+      <button class="sheet-trigger" id="open-answers" type="button" disabled>Answer sheet</button>
     </nav>
     <header class="page-header">
       <div>
         <h1><span class="flag" aria-hidden="true"></span>France phone prefix quiz</h1>
-        <p>Match five landline prefixes to their historic zones in metropolitan France.</p>
+        <p id="quiz-description">Match five landline prefixes to their historic zones in metropolitan France.</p>
       </div>
       <div class="progress" id="progress" hidden>
         <div class="progress-label">
@@ -28,6 +31,24 @@
         <progress id="progress-bar" value="0"></progress>
       </div>
     </header>
+
+    <div class="quiz-options">
+      <nav class="quiz-modes" aria-label="Prefix length">
+        <a id="mode-first" href="./" aria-current="page">First pair <span>04</span></a>
+        <a id="mode-detailed" href="?digits=4">First two pairs <span>04 92</span></a>
+      </nav>
+      <div class="group-control" id="group-control" hidden>
+        <label for="prefix-group">Starts with</label>
+        <select id="prefix-group" disabled>
+          <option value="">Any first pair</option>
+          <option value="01">01</option>
+          <option value="02">02</option>
+          <option value="03">03</option>
+          <option value="04">04</option>
+          <option value="05">05</option>
+        </select>
+      </div>
+    </div>
 
     <div class="quiz">
       <section class="prompt" aria-labelledby="question">
@@ -39,7 +60,8 @@
       </section>
 
       <section class="map-panel" aria-label="Quiz map">
-        <svg id="map" viewBox="0 0 640 640" role="group" aria-label="Metropolitan France with selectable cities" data-mode="zones" data-source="./map-data.json?v=2">
+        <svg id="map" viewBox="0 0 640 640" role="group" aria-label="Metropolitan France with selectable cities"
+             data-mode="zones" data-source="./map-data.json?v=2" data-detailed-source="./map-data-four-digit.json">
           <g id="state-shapes" aria-hidden="true"></g>
           <g id="guess-zones" aria-hidden="true"></g>
           <g id="coverage" aria-hidden="true"></g>
@@ -55,6 +77,12 @@
             <p class="feedback-detail" id="feedback-detail"></p>
           </div>
         </div>
+        <div class="department-control" id="department-control" hidden>
+          <label for="department-guess">Or choose from the list</label>
+          <select id="department-guess" disabled>
+            <option value="">Choose a department</option>
+          </select>
+        </div>
         <button class="advance" id="advance" type="button" aria-describedby="feedback-title feedback-detail" disabled>
           <span id="advance-label">Next code</span>
           <span aria-hidden="true">→</span>
@@ -69,6 +97,7 @@
       <a href="https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/fin-du-decoupage-geographique-des-numeros-fixes-les-nouvelles-regles-en-vigueur.html">Arcep numbering zones</a>
       <a href="https://www.data.gouv.fr/datasets/contours-administratifs">Boundaries by data.gouv.fr</a>
       <a href="./map-data.json?v=2" download>Map data</a>
+      <a class="detailed-source" href="./map-data-four-digit.json" download>Four-digit map data</a>
       <a href="https://opendatacommons.org/licenses/odbl/1-0/" rel="license">ODbL 1.0</a>
     </footer>
   </main>

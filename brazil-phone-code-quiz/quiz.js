@@ -16,9 +16,16 @@ const feedbackDetail = document.querySelector("#feedback-detail");
 const advance = document.querySelector("#advance");
 const advanceLabel = document.querySelector("#advance-label");
 const list = new Intl.ListFormat("en", { type: "conjunction" });
+const percent = new Intl.NumberFormat("en", { style: "percent", maximumFractionDigits: 1 });
 const states = new Map();
-const usesZones = map.dataset.mode === "zones";
-const questionText = question.textContent;
+const detailedZones = new Map();
+const usesDepartments = Boolean(map.dataset.detailedSource && new URLSearchParams(location.search).get("digits") === "4");
+const usesZones = map.dataset.mode === "zones" && !usesDepartments;
+const questionText = usesDepartments ? "Which department used this prefix?" : question.textContent;
+const prefixGroup = usesDepartments ? document.querySelector("#prefix-group") : null;
+const departmentGuess = usesDepartments ? document.querySelector("#department-guess") : null;
+const sheetButton = document.querySelector("#open-answers");
+const answerSheet = sheetButton && typeof createQuizAnswerSheet === "function" ? createQuizAnswerSheet(sheetButton) : null;
 
 // Give small states larger tap targets linked to their locations on the map.
 const calloutPositions = {
@@ -31,6 +38,7 @@ const calloutPositions = {
   SE: [560, 318],
 };
 
+let allCodes = [];
 let codes = [];
 let deck = [];
 let position = 0;
@@ -58,18 +66,20 @@ function renderMap(data) {
   for (const state of data.states) {
     const shape = svg("g", {
       class: "state",
-      role: "button",
-      tabindex: "0",
-      "aria-label": state.name,
       "data-state": state.id,
     });
+    if (!usesDepartments) {
+      shape.setAttribute("role", "button");
+      shape.setAttribute("tabindex", "0");
+      shape.setAttribute("aria-label", state.name);
+    }
     shape.append(
       svg("title", {}, state.name),
       svg("path", { d: state.path, "fill-rule": "evenodd" }),
     );
 
     const label = svg("g", { class: "state-label", "data-state": state.id });
-    const callout = calloutPositions[state.id];
+    const callout = usesDepartments ? undefined : calloutPositions[state.id];
     const [x, y] = callout ?? [state.x, state.y];
     if (callout) {
       label.classList.add("is-callout");
@@ -95,6 +105,24 @@ function renderMap(data) {
     labels.append(label);
     states.set(state.id, { name: state.name, shape, label });
   }
+}
+
+function setupDetailedMode() {
+  document.body.classList.add("department-quiz");
+  document.querySelector("#mode-first").removeAttribute("aria-current");
+  document.querySelector("#mode-detailed").setAttribute("aria-current", "page");
+  document.querySelector("#quiz-description").textContent = "Practice four-digit landline prefixes using recorded local allocations from before 2023.";
+  document.querySelector("#group-control").hidden = false;
+  document.querySelector("#department-control").hidden = false;
+  document.querySelector("#state-labels").setAttribute("aria-hidden", "true");
+  map.setAttribute("aria-label", "Metropolitan France with department boundaries");
+  question.textContent = questionText;
+
+  prefixGroup.addEventListener("change", startQuiz);
+  departmentGuess.addEventListener("change", () => {
+    const selection = states.get(departmentGuess.value);
+    if (selection) guess(selection.shape, true);
+  });
 }
 
 function renderZoneMap(data) {
@@ -139,6 +167,7 @@ function setFeedback(tone, icon, title, detail = "") {
 
 function setInteraction(enabled) {
   map.classList.toggle("is-answered", !enabled);
+  if (departmentGuess) departmentGuess.disabled = !enabled;
   for (const shape of map.querySelectorAll('[role="button"]')) {
     shape.setAttribute("tabindex", enabled ? "0" : "-1");
     shape.setAttribute("aria-disabled", String(!enabled));
@@ -171,6 +200,27 @@ function clearCoverage() {
   for (const { label } of states.values()) label.classList.remove("is-correct");
 }
 
+function formatCode(code) {
+  return usesDepartments ? `${code.slice(0, 2)}\u00a0${code.slice(2)}` : code;
+}
+
+function answerIds(answer) {
+  return usesDepartments ? answer.departments : answer.states;
+}
+
+function describeAnswer(answer) {
+  const note = usesDepartments && answer.localShare < 1
+    ? `Named local areas account for ${percent.format(answer.localShare)} of the archived allocated numbers.`
+    : "";
+  return {
+    code: formatCode(answer.code),
+    area: usesZones ? answer.name : list.format(answerIds(answer).map((id) => states.get(id).name)),
+    examples: answer.places,
+    paths: usesDepartments ? answer.zones.map((id) => detailedZones.get(id).path) : [answer.path],
+    note,
+  };
+}
+
 function showQuestion() {
   phase = "asking";
   missed = false;
@@ -178,11 +228,14 @@ function showQuestion() {
   clearCoverage();
   setInteraction(true);
 
-  codeText.textContent = deck[position].code;
+  codeText.textContent = formatCode(deck[position].code);
+  if (departmentGuess) departmentGuess.value = "";
   question.textContent = questionText;
   advance.disabled = true;
   advanceLabel.textContent = "Next code";
-  if (usesZones) {
+  if (usesDepartments) {
+    setFeedback("neutral", "⌖", "Choose a department", "Select any department that had local allocations for this prefix.");
+  } else if (usesZones) {
     setFeedback("neutral", "⌖", "Choose a location", "Select a spot or a city on the map.");
   } else {
     setFeedback("neutral", "⌖", "Choose a state", "Select a state or its two-letter label on the map.");
@@ -190,6 +243,7 @@ function showQuestion() {
 }
 
 function startQuiz() {
+  codes = prefixGroup?.value ? allCodes.filter((answer) => answer.code.startsWith(prefixGroup.value)) : allCodes;
   deck = [...codes];
   for (let i = deck.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -207,7 +261,7 @@ function guess(target, keyboard) {
   if (phase !== "asking") return;
   const answer = deck[position];
   const stateId = target.dataset.state;
-  const correct = usesZones ? target.dataset.prefix === answer.code : answer.states.includes(stateId);
+  const correct = usesZones ? target.dataset.prefix === answer.code : answerIds(answer).includes(stateId);
   clearWrongGuess();
 
   if (!correct) {
@@ -218,6 +272,7 @@ function guess(target, keyboard) {
       updateProgress(position);
     }
     markWrongGuess(target, true);
+    if (departmentGuess) departmentGuess.value = "";
     const name = target.dataset.city ?? states.get(stateId)?.name;
     const chosen = name ? `You chose ${name}. ` : "";
     setFeedback("wrong", "×", "Try again", `${chosen}This code will also come back at the end.`);
@@ -228,15 +283,15 @@ function guess(target, keyboard) {
   phase = "answered";
   if (!missed && position < codes.length) firstTry += 1;
   setInteraction(false);
-  coverage.replaceChildren(svg("path", { d: answer.path, "fill-rule": "evenodd" }));
-  const places = answer.places.length > 0 ? ` Includes ${list.format(answer.places)}.` : "";
-  if (usesZones) {
-    setFeedback("correct", "✓", "Correct!", `${answer.code} · ${answer.name}.${places}`);
-  } else {
-    for (const id of answer.states) states.get(id).label.classList.add("is-correct");
-    const names = list.format(answer.states.map((id) => states.get(id).name));
-    setFeedback("correct", "✓", "Correct!", `DDD ${answer.code} · ${names}.${places}`);
+  const { code, area, examples, paths } = describeAnswer(answer);
+  coverage.replaceChildren(...paths.map((path) => svg("path", { d: path, "fill-rule": "evenodd" })));
+  if (!usesZones) {
+    for (const id of answerIds(answer)) states.get(id).label.classList.add("is-correct");
   }
+  const places = examples.length > 0 ? ` Includes ${list.format(examples)}.` : "";
+  const displayCode = usesZones || usesDepartments ? code : `DDD ${code}`;
+  const areaDescription = usesDepartments ? `Recorded in ${area}` : area;
+  setFeedback("correct", "✓", "Correct!", `${displayCode} · ${areaDescription}.${places}`);
   updateProgress(position + 1);
   advanceLabel.textContent = position + 1 < deck.length ? "Next code" : "See results";
   advance.disabled = false;
@@ -289,11 +344,20 @@ async function loadQuiz() {
   advance.disabled = true;
   setFeedback("neutral", "⌖", "Loading the map");
   try {
-    const response = await fetch(map.dataset.source || "./map-data.json");
+    const source = usesDepartments ? map.dataset.detailedSource : map.dataset.source || "./map-data.json";
+    const response = await fetch(source);
     if (!response.ok) throw new Error(`Map data returned HTTP ${response.status}`);
     const data = await response.json();
+    if (usesDepartments) {
+      for (const zone of data.zones) detailedZones.set(zone.id, zone);
+      data.states = data.departments;
+      const byName = [...data.states].sort((a, b) => a.name.localeCompare(b.name, "fr"));
+      departmentGuess.append(...byName.map((state) => new Option(`${state.name} (${state.id})`, state.id)));
+      prefixGroup.disabled = false;
+    }
     renderMap(data);
-    codes = data.codes;
+    allCodes = data.codes;
+    answerSheet?.update(data, describeAnswer);
     startQuiz();
   } catch (error) {
     console.error(error);
@@ -301,6 +365,12 @@ async function loadQuiz() {
     zones?.replaceChildren();
     labels.replaceChildren();
     states.clear();
+    detailedZones.clear();
+    if (prefixGroup) prefixGroup.disabled = true;
+    if (departmentGuess) {
+      departmentGuess.disabled = true;
+      departmentGuess.options.length = 1;
+    }
     phase = "error";
     setFeedback("wrong", "×", "The map could not load", "Try loading it again.");
     advanceLabel.textContent = "Reload map";
@@ -308,4 +378,5 @@ async function loadQuiz() {
   }
 }
 
+if (usesDepartments) setupDetailedMode();
 loadQuiz();

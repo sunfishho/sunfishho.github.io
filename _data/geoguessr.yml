@@ -10,8 +10,8 @@
       action: Play quiz
       image: /geoguessr/brazil.png
     - title: France
-      detail: 5 prefixes
-      summary: Find the historic landline zones for 01–05 in metropolitan France.
+      detail: 2 practice modes
+      summary: Practice historic two- and four-digit landline prefixes in metropolitan France.
       url: /france-phone-code-quiz/
       action: Play quiz
       image: /geoguessr/france.png
