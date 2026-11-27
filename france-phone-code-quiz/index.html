@@ -8,7 +8,7 @@
   <title>France Phone Prefix Quiz</title>
   <link rel="stylesheet" href="../brazil-phone-code-quiz/quiz.css">
   <link rel="stylesheet" href="./france.css">
-  <script src="../brazil-phone-code-quiz/quiz.js?v=3" defer></script>
+  <script src="../brazil-phone-code-quiz/quiz.js?v=4" defer></script>
 </head>
 <body>
   <main class="page">
@@ -36,7 +36,7 @@
       </section>
 
       <section class="map-panel" aria-label="Quiz map">
-        <svg id="map" viewBox="0 0 640 640" role="group" aria-label="Metropolitan France with selectable cities" data-mode="zones">
+        <svg id="map" viewBox="0 0 640 640" role="group" aria-label="Metropolitan France with selectable cities" data-mode="zones" data-source="./map-data.json?v=2">
           <g id="state-shapes" aria-hidden="true"></g>
           <g id="guess-zones" aria-hidden="true"></g>
           <g id="coverage" aria-hidden="true"></g>
@@ -62,10 +62,10 @@
     <noscript><p>Enable JavaScript to play the quiz.</p></noscript>
 
     <footer class="sources">
-      <p>Historic zone boundaries are approximate. Since 2023, these prefixes can be assigned anywhere in metropolitan France.</p>
+      <p>The map uses 2022 Arcep records, with boundaries simplified for display. Since 2023, these prefixes can be assigned anywhere in metropolitan France.</p>
       <a href="https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/fin-du-decoupage-geographique-des-numeros-fixes-les-nouvelles-regles-en-vigueur.html">Arcep numbering zones</a>
       <a href="https://www.data.gouv.fr/datasets/contours-administratifs">Boundaries by data.gouv.fr</a>
-      <a href="./map-data.json" download>Map data</a>
+      <a href="./map-data.json?v=2" download>Map data</a>
       <a href="https://opendatacommons.org/licenses/odbl/1-0/" rel="license">ODbL 1.0</a>
     </footer>
   </main>

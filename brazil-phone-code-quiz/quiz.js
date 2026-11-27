@@ -289,7 +289,7 @@ async function loadQuiz() {
   advance.disabled = true;
   setFeedback("neutral", "⌖", "Loading the map");
   try {
-    const response = await fetch("./map-data.json");
+    const response = await fetch(map.dataset.source || "./map-data.json");
     if (!response.ok) throw new Error(`Map data returned HTTP ${response.status}`);
     const data = await response.json();
     renderMap(data);
