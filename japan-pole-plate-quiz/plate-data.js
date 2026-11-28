@@ -56,7 +56,7 @@ const polePlates = [
     name: "Kansai",
     utility: "Kansai Transmission and Distribution",
     description: "A tall plate with Japanese text running vertically down the right and several short code groups below.",
-    clue: "Look for the vertical Japanese lettering along the right side, followed by short number or letter groups.",
+    clue: "Read the vertical line name and the numbers below it. Compass letters such as W in W3 can mark a branch. Some plates print the direction in Japanese, for example 北 for north.",
     field: "https://www.kansai-td.co.jp/faq/2/2/2/q10028629.html",
   },
   {

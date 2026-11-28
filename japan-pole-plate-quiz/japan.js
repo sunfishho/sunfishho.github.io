@@ -220,6 +220,7 @@ function addReferenceCards() {
     description.textContent = entry.clue;
     const name = entry.referenceTitle ?? entry.name;
     copy.append(heading, description, referenceLink(entry.field, "Field example", `Field example for ${name}`));
+    copy.append(referenceLink(`./numbering/#${entry.region ?? entry.id}`, "Numbering examples", `Numbering examples for ${name}`));
     if (entry.learnablePhoto) {
       copy.append(referenceLink(entry.learnablePhoto, "LearnableMeta photo", `LearnableMeta photo for ${name}`));
     }

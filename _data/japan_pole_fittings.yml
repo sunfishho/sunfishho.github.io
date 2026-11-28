@@ -1,0 +1,138 @@
+- id: pole-materials
+  name: Pole materials
+  summary: Start with the shaft, then look at what is attached to it. Pole material is useful context across Japan.
+  examples:
+    - name: Concrete, wood, and sectional steel
+      evidence: Utility documentation
+      reading: Concrete shafts are common and often gray. On a clear view, wood can show grain and a sectional steel shaft can show joints. Kansai’s utility describes assembled steel tube poles as useful where access is tight. These are construction choices seen within utility areas.
+      url: https://www.kansai-td.co.jp/corporate/learning-with-okurin/about-power-distribution.html
+      source: Kansai Transmission and Distribution on pole construction
+      diagram: pole-materials
+      diagram_alt: Three pole silhouettes labeled concrete, wood, and sectional steel.
+    - name: Power, telecom, and shared poles
+      evidence: Utility documentation
+      reading: Look up to separate the equipment before comparing its shape. Transformer tanks and insulators mark the power hardware. Lower telecom cables can share the same shaft, and an angled cable running toward the ground is a guy wire supporting the pole.
+      url: https://www.ntt-east.co.jp/contact/pdf/miwakekata.pdf#page=2
+      source: NTT East equipment and support diagrams
+- id: transformer-mounts
+  name: Transformer mounts
+  summary: Trace the brace to the pole and to the crossbar. Mounting geometry gives you a stronger comparison than the number of transformer tanks alone.
+  examples:
+    - name: Two rails and a backing board
+      evidence: Guide and field example
+      reading: Look for a flat wooden backing behind the transformer tank in this Kantō example. Paired rails alone can also occur in Hokkaidō. Plonk It shows a side-mounted cross and a square frame with several tanks among the Hokkaidō variants.
+      url: https://maps.app.goo.gl/yF8PkEfCbKfek7FTA
+      source: Kantō backing board on Street View
+      compare_url: https://maps.app.goo.gl/vxrc8aYqGXDnmM5HA
+      compare_source: Hokkaidō side-mounted cross on Street View
+    - name: Square frame with an upper or lower bar
+      evidence: Guide and field example
+      reading: Follow the projecting bar to the square frame. Plonk It’s pictured Tōhoku style joins it at the upper edge. The Kansai examples join it lower down, with straight and zigzag forms. Look for the connection point from a side view.
+      url: https://learnablemeta.com/images/Tft9snCbtxhSbiMjPhkRX1KUCGmm6tTCIOFC.avif
+      source: LearnableMeta Kansai transformer photos
+      compare_url: https://maps.app.goo.gl/rsskJQp9oPpGdPDR9
+      compare_source: Tōhoku transformer on Street View
+      diagram: square-mounts
+      diagram_alt: Square transformer frame with the bar above in the Tōhoku example and below in the Kansai example.
+    - name: Large triangular braces in Chūbu
+      evidence: Field photo
+      reading: Two diagonal braces rise from the ends of a long carrier bar toward the pole, with the tanks hanging below. The outline is easy to spot against the sky. Other Chūbu installations can use much slimmer brackets, so use a plate or a second pole for confirmation.
+      url: https://learnablemeta.com/images/1/xGl3Hws87rHx02BTlHkdoxkAo1Zeao0THMof.avif
+      source: LearnableMeta Chūbu triangle mount
+    - name: Chūgoku and Shikoku crossbars
+      evidence: Guide and field example
+      reading: Both examples have a crossbar near the tank. The Chūgoku example has a full triangular support and longer or taller fittings at the end. The Shikoku example shows a partial brace and short cap-shaped fittings. Compare the brace and the outer fittings together.
+      url: https://learnablemeta.com/images/1/rRWfhxF8bXAXIsrvaowq8ljsq8c5pQpKMEHU.avif
+      source: LearnableMeta Chūgoku crossbar
+      compare_url: https://learnablemeta.com/images/1/sPSfdwjPbLjxVHgaUvkx5qgrMjWuuWX2QzAZ.avif
+      compare_source: LearnableMeta Shikoku crossbar
+    - name: Straight bar in Kyūshū and T-shaped bar in Okinawa
+      evidence: Guide and field example
+      reading: Both designs can carry transformers on opposite sides of the pole. Look for a straight arm ending in a cluster of three insulators in the Kyūshū example. Follow the arm around the pole to see the transverse piece that forms the Okinawa T. Some Okinawa installations show only one tank.
+      url: https://learnablemeta.com/images/qmxiVCCZmkYE5bMIQHkfAq3Sg8kNGbdXjwMT.avif
+      source: LearnableMeta Kyūshū transformer
+      compare_url: https://learnablemeta.com/images/JCgIMw2sb6bAbgebt4qx0JLAoJ0VcuWxabYm.avif
+      compare_source: LearnableMeta Okinawa transformer
+- id: pole-tops
+  name: Pole tops and insulators
+  summary: Compare the top connector, the lower bar, and the caps in silhouette. A side view can make a short arm look longer or hide a second fitting.
+  examples:
+    - name: Three tuning-fork profiles
+      evidence: Guide and field example
+      reading: Look between the two uprights. The Kantō example has a broad top connector that extends past them. The pictured Chūbu type has a shorter top bar. The Kansai photo shows a thin line at the top and a substantial horizontal bar below.
+      url: https://learnablemeta.com/images/vd4N4PbMYCvPhmODqwuU5O8Ok5sBRJfYO0oH.avif
+      source: LearnableMeta Kansai pole top
+      compare_url: https://goo.gl/maps/S5iSLiYT4qrDw5eC7
+      compare_source: Kantō pole top on Street View
+      diagram: fork-tops
+      diagram_alt: Fork tops with a projecting top connector in Kantō, a short one in Chūbu, and a thin top line above a lower bar in Kansai.
+    - name: Filled tent shape in Hokuriku
+      evidence: Guide and field example
+      reading: Look for a peaked top with two solid-looking sloping sides. Inspect the pole head above the cables, where the tent outline is easier to separate from the wires. Pair the hint with a horizontal power plate if the angle is poor.
+      url: https://goo.gl/maps/VQtFcRH2RaJJGuFCA
+      source: Plonk It’s Hokuriku pole top on Street View
+    - name: Thin uprights in Chūgoku
+      evidence: Field photo
+      reading: Check the thickness of the narrow rails rising above the pole head. The paired photo shows the slim Chūgoku silhouette and a much bulkier cap that can look similar at a distance. Use a readable power plate or a second fitting to resolve it.
+      url: https://learnablemeta.com/images/1/vZ4HhmLGGJ8jz9ba8Fq4VV1GprSbhaJDuDud.avif
+      source: LearnableMeta thin and thick pole-top comparison
+    - name: Tall dark caps and bulkier insulators
+      evidence: Field photo
+      reading: The Kantō example has tall, narrow dark caps perched on pale insulators. The Kyūshū example has a rounder dark shape with a larger body. Compare the cap profile and the pale base, since the two look alike from a distance.
+      url: https://learnablemeta.com/images/ppVNAFfBeDQ9bRdr4J1ABg4FxtO139VsdJbi.avif
+      source: LearnableMeta Kantō tall-cap insulators
+      compare_url: https://learnablemeta.com/images/1/1772354068052-40W.avif
+      compare_source: LearnableMeta Kyūshū bulky insulators
+    - name: Open angle in Kansai and right angle in Shikoku
+      evidence: Guide and field example
+      reading: Trace the small arm at the outer end of the crossbar. This Kansai example has a bend of about 120 degrees. The Shikoku comparison turns closer to a right angle. Plonk It also shows a Kansai version that angles down without a distinct bend.
+      url: https://learnablemeta.com/images/LDE0YRJ061gpKjGHwO6KYRkv6rRrZsyEl5Ug.avif
+      source: LearnableMeta Kansai angled attachment
+      compare_url: https://maps.app.goo.gl/bwypJbQDAXz4yUv98
+      compare_source: Shikoku right-angle attachment on Street View
+      diagram: angled-brackets
+      diagram_alt: Small crossbar fittings showing the more open Kansai bend and the near-right-angle Shikoku bend.
+- id: pole-markings
+  name: Reflectors, arrows, and guy wires
+  summary: Note where a marking is mounted and how it is shaped. Yellow and black striping is widespread, and several regional patterns overlap.
+  examples:
+    - name: Orange up-arrow on a Chūgoku utility pole
+      evidence: Field photo
+      reading: The small orange arrow points up and is fastened to the utility pole just above the plates. Look underneath it for a Chūgoku power plate marked Energia if the lettering is readable.
+      url: https://goo.gl/maps/eAAFvQmmADNf3J6C9
+      source: Chūgoku arrow on Street View
+      compare_url: https://goo.gl/maps/Uu2qrKToJgsdxNYs8
+      compare_source: Shikoku band on Street View
+      diagram: shikoku-chugoku
+      diagram_alt: Chūgoku utility pole with an orange up-arrow above the plate beside a Shikoku pole with an orange-and-black band around the shaft.
+    - name: Hokkaidō road-edge arrows
+      evidence: Guide and field example
+      reading: The striped markers hang over the road edge and point down. The Hokkaidō road authority uses them to show the shoulder in snow and blowing snow. Similar markers can appear in northern Honshū. The mounting and direction distinguish them from the little up-arrow attached to a Chūgoku pole.
+      url: https://learnablemeta.com/images/rbt49036XAp6qgaX2GfhJ47TJoYSSkvz7MKU.avif
+      source: LearnableMeta Hokkaidō road-edge arrow
+      compare_url: https://www.hkd.mlit.go.jp/ky/ki/kouhou/70th/full/data/03/02/03-02_04.pdf
+      compare_source: Hokkaidō Development Bureau on road-edge markers
+    - name: Narrow orange-and-black wrap in Shikoku
+      evidence: Field photo
+      reading: In this example, an orange strip runs around the pole as a narrow horizontal band, with black bordering it. Look for the wrap itself and its position on the shaft. A dark and yellow protective panel at ground level is a separate clue.
+      url: https://goo.gl/maps/Uu2qrKToJgsdxNYs8
+      source: Shikoku pole band on Street View
+    - name: Short pale panel and tall muted strips
+      evidence: Field photo
+      reading: The Tōhoku photo shows a small gray patch with three pale vertical strips. The Kansai example is much taller and the yellow looks washed out. Shape, height, and backing color together are more useful than brightness, which changes with age and lighting.
+      url: https://learnablemeta.com/images/G2vLOetEL3hTzA3ABMZrJUhjq2c0ydzb8OC2.avif
+      source: LearnableMeta Tōhoku reflector
+      compare_url: https://learnablemeta.com/images/2AqmRg6tGF9qp75C9SVOJ9fhThcaFffddD4G.avif
+      compare_source: LearnableMeta Kansai reflector
+    - name: Shikoku center tabs and southern raised pads
+      evidence: Field photo
+      reading: Look closely at the small joins between the black and yellow sections on this Shikoku panel. The Kyūshū and Okinawa-style example has a conspicuously raised face. Straight yellow bands alone occur across Japan.
+      url: https://learnablemeta.com/images/1/xNIDVV5hvP2bbodjBtuMPQum9zq4Fd4q8DGe.avif
+      source: LearnableMeta Shikoku reflector
+      compare_url: https://learnablemeta.com/images/f0MWVKPkrArYuFj88CpKU6AHb61aaZC8R1Z6.avif
+      compare_source: LearnableMeta Kyūshū and Okinawa reflector
+    - name: Paddle-shaped guy-wire guard
+      evidence: Field photo
+      reading: Follow the slanting wire to the sleeve near the ground. A broad end tapering into a narrow shaft is the paddle profile shown for both Kyūshū and Okinawa. A readable plate or the transformer mount helps narrow the guess.
+      url: https://learnablemeta.com/images/mJhbSJJEkaJv131r5K3PW97sehB5YuTbYftQ.avif
+      source: LearnableMeta Kyūshū and Okinawa guy-wire guard

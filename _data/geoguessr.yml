@@ -24,3 +24,8 @@
       url: /japan-pole-plate-quiz/
       action: Play quiz
       image: /geoguessr/japan-pole.jpg?v=2
+    - title: Japan pole guide
+      summary: Read power and NTT numbering, and compare pole types and fittings in field examples.
+      url: /japan-pole-plate-quiz/numbering/
+      action: Read guide
+      image: /geoguessr/japan-pole-guide.jpg

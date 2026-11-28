@@ -15,6 +15,17 @@
   padding-top: 26px;
 }
 
+.practice-nav,
+.practice-tools {
+  flex-wrap: wrap;
+}
+
+.practice-tools {
+  display: flex;
+  align-items: center;
+  gap: 7px 12px;
+}
+
 .flag {
   border: 1px solid #e1d9ce;
   background: #fffefa;

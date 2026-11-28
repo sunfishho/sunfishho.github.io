@@ -1,0 +1,88 @@
+---
+permalink: /japan-pole-plate-quiz/numbering/
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Read Japanese power and NTT pole plates, and compare pole construction and fittings across Japan.">
+  <title>Japan Pole Guide</title>
+  <link rel="stylesheet" href="{{ '/brazil-phone-code-quiz/quiz.css' | relative_url }}?v=3">
+  <link rel="stylesheet" href="{{ '/japan-pole-plate-quiz/numbering/numbering.css' | relative_url }}">
+  <script src="{{ '/japan-pole-plate-quiz/numbering/fitting-art.js' | relative_url }}" defer></script>
+</head>
+<body>
+  <main class="page numbering-guide">
+    <nav class="practice-nav" aria-label="Practice navigation">
+      <a href="{{ '/geoguessr/' | relative_url }}"><span aria-hidden="true">←</span> GeoGuessr practice</a>
+      <a href="{{ '/japan-pole-plate-quiz/' | relative_url }}">Play the Japan quiz <span aria-hidden="true">→</span></a>
+    </nav>
+
+    <header class="numbering-heading">
+      <h1>Japan pole guide</h1>
+      <p>Read the numbering on power and NTT plates across all ten utility areas. Compare pole types and fittings for a second clue.</p>
+    </header>
+
+    <nav class="numbering-index" aria-label="Guide sections">
+      {% for group in site.data.japan_pole_numbering %}
+        <a href="#{{ group.id | escape }}">{{ group.name | escape }}</a>
+      {% endfor %}
+      <a class="fittings-jump" href="#pole-types">Pole types and fittings</a>
+    </nav>
+
+    <aside class="numbering-note" aria-label="How to read the examples">
+      <p><strong>Read the whole plate.</strong> Compass letters appear on power plates in more than one region, and left/right characters can appear on both power and telecom plates. Use the line name, number layout, and company mark together.</p>
+      <p>Utility examples show how operators present their codes. Field photos add examples of how the markings actually appear. Tentative readings are marked where the image is hard to read.</p>
+    </aside>
+
+    {% assign first_fittings_group = site.data.japan_pole_fittings | first %}
+    {% assign groups = site.data.japan_pole_numbering | concat: site.data.japan_pole_fittings %}
+    {% for group in groups %}
+      {% if group.id == first_fittings_group.id %}
+        <header class="fittings-heading" id="pole-types">
+          <h2>Pole types and fittings</h2>
+          <p>Compare the pole material, the arms near the top, and the hardware around the transformers. Regional patterns can overlap.</p>
+          <nav class="numbering-index" aria-label="Pole construction and fitting topics">
+            {% for topic in site.data.japan_pole_fittings %}
+              <a href="#{{ topic.id | escape }}">{{ topic.name | escape }}</a>
+            {% endfor %}
+          </nav>
+        </header>
+      {% endif %}
+      <section class="numbering-region" id="{{ group.id | escape }}" aria-labelledby="{{ group.id | escape }}-title">
+        <header>
+          <h2 id="{{ group.id | escape }}-title">{{ group.name | escape }}</h2>
+          <p>{{ group.summary | escape }}</p>
+        </header>
+        <div class="numbering-examples">
+          {% for example in group.examples %}
+            <article class="numbering-example">
+              <span class="sample-evidence">{{ example.evidence | escape }}</span>
+              <h3>{{ example.name | escape }}</h3>
+              {% if example.code %}<pre class="plate-code">{{ example.code | escape }}</pre>{% endif %}
+              {% if example.diagram %}
+                <canvas class="fitting-picture" data-fitting="{{ example.diagram | escape }}" width="430" height="160" role="img" aria-label="{{ example.diagram_alt | default: example.name | escape }}"></canvas>
+              {% endif %}
+              <p>{{ example.reading | escape }}</p>
+              <div class="numbering-references">
+                {% if example.url %}
+                  <a href="{{ example.url | escape }}" target="_blank" rel="noopener">{{ example.source | escape }} <span aria-hidden="true">↗</span></a>
+                {% endif %}
+                {% if example.compare_url %}
+                  <a href="{{ example.compare_url | escape }}" target="_blank" rel="noopener">{{ example.compare_source | escape }} <span aria-hidden="true">↗</span></a>
+                {% endif %}
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+    {% endfor %}
+
+    <footer class="sources">
+      <a href="https://www.plonkit.net/japan">Plonk It Japan</a>
+      <a href="https://learnablemeta.com/maps/67168e876b79c3cb4f964543">A Learnable Meta Japan, curated by trausi</a>
+    </footer>
+  </main>
+</body>
+</html>

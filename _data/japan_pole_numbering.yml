@@ -1,0 +1,363 @@
+- id: kansai
+  name: Kansai
+  summary: Read the vertical line name and the numbers below it. Kansai uses compass letters E, W, S, and N or their Japanese equivalents 東, 西, 南, and 北 for branch directions. Its application form also uses G for 外.
+  examples:
+    - name: Base number over a compass branch
+      evidence: Tentative photo reading
+      code: |-
+        5
+        N4
+      reading: The angled photo appears to show 5 over N4 on the power plate. N is the north marker. The separate lower plate appears to contain an R code, which would fit NTT.
+      url: https://www.kansai-td.co.jp/application/collocation/pdf/tele_equip.pdf
+      source: Compare Kansai’s marked-up plate examples
+    - name: Same arrangement with a compass kanji
+      evidence: Field photo
+      code: |-
+        40
+        北9
+      reading: The white plate has vertical place text above a main number and north branch. 北9 occupies the same kind of position as N4. Two small groups sit well below the main code.
+      url: https://learnablemeta.com/images/1/hpchzl4N5dNdgiQol5hO3P5Yzt3j1V6lv6IQ.avif
+      source: LearnableMeta Kansai photo
+    - name: Two directional steps on one plate
+      evidence: Utility example
+      code: |-
+        中之島浜
+        4
+        北3
+        東2
+      reading: The operator’s form shows the line name followed by main number 4 and the north and east branch fields. Its other example writes comparable fields as N3 and E2. The same form labels separate tiny footer numbers as the year and pole length.
+      url: https://www.kandensv.co.jp/service/management/kyouga/data/shinseisho_ichirann_kiki.pdf#page=10
+      source: Kanden Service’s illustrated form
+      compare_url: https://www.kansai-td.co.jp/application/consignment/low-pressure/online/takusou-kun/pdf/ope_manual_ippan01.pdf
+      compare_source: Kansai form for E, W, S, N, and G
+    - name: Plain main number
+      evidence: Field photo
+      code: |-
+        69
+      reading: In this paired example, the lower power plate has vertical lettering and 69 as the main number. This is useful practice for a Kansai plate with no visible direction suffix.
+      url: https://www.ntt-west.co.jp/tenga/faq/img/img02.jpg
+      source: NTT West’s Kansai paired photo
+- id: ntt
+  name: NTT
+  summary: Start with the NTT name or mark when it is legible. The tag typically combines a line or place name with its own serial. Lettering direction, plate position, and the serial format vary.
+  examples:
+    - name: Left and right branch markings
+      evidence: Utility example
+      code: |-
+        東筑前
+        4L2
+      reading: NTT uses L or 左 for left and R or 右 for right in these examples. Read the branch string with the line name. The Kansai paired diagram puts this NTT example beside a power-company example with compass branches.
+      url: https://www.kandensv.co.jp/service/management/kyouga/data/shinseisho_ichirann_kiki.pdf#page=10
+      source: Illustrated power and NTT comparison
+    - name: Compound alphanumeric serials
+      evidence: Utility example
+      code: |-
+        6R0D
+        3R1L
+      reading: NTT’s own illustrations show compact chains of letters and numerals. Keep the zero and the order of all the characters. The examples establish the visible format, while the meanings of additional letters can depend on the local system.
+      url: https://www.ntt-ft.jp/contact/pdf/pole_owner.pdf#page=2
+      source: NTT reading examples
+    - name: A compass kanji inside the line name
+      evidence: Field photo
+      code: |-
+        府道西 46
+        北幹 10R15
+      reading: NTT West labels these as NTT examples from Kansai and Kyūshū. 西 and 北 are part of the written line names here. Look at the boundary between the line name and the serial before treating a character as a branch clue.
+      url: https://www.ntt-west.co.jp/tenga/faq/
+      source: NTT West’s regional photo captions
+    - name: Simple serials can look alike
+      evidence: Field photo
+      code: |-
+        横岡幹  25
+        横岡線  44
+      reading: NTT East’s Tōhoku photo pairs the upper telecom tag ending in 25 with the wider power tag ending in 44. Both main numbers are plain digits, so the plate layout and company identification do the work.
+      url: https://www.ntt-east.co.jp/contact/pdf/miwakekata.pdf#page=1
+      source: NTT East’s paired pole photos
+- id: hokkaido
+  name: Hokkaidō
+  summary: "Start with the six pairs of digits down the narrow power plate. The first pair is the 画 field and can help narrow the area."
+  examples:
+    - name: "Six labeled rows"
+      evidence: Utility example
+      code: |-
+        53画
+        07区
+        64図
+        04番
+        25の
+        64号
+      reading: "Read the six pairs from top to bottom and keep leading zeros. HEPCO reads the six labels in this order."
+      url: https://www.hepco.co.jp/network/electric_life/service/location_info/index.html
+      source: Hokkaido Electric Power Network
+    - name: "Extra marks below the six rows"
+      evidence: Field photo
+      code: |-
+        43 / 22 / 90 / 07 / 35 / 42
+      reading: "The six prominent pairs make up the main number. The tiny markings under the 42 row are separate from those six pairs."
+      url: https://learnablemeta.com/images/cPLWyqvDuSesZY5F9jzNylV6MGKB3HNVbj10.avif
+      source: LearnableMeta Hokkaidō photo
+    - name: "Locations seen in published records"
+      evidence: Location records
+      code: |-
+        20画  Hakodate
+        31画  Muroran
+        41画  Sapporo
+        44画  Kushiro
+        52画  Asahikawa
+      reading: "These are the first fields of poles listed by the transport bureau at these branch locations. Use them as anchors for learning the local grid. Nearby places can share a first field."
+      url: https://wwwtb.mlit.go.jp/hokkaido/content/000360900.pdf
+      source: Hokkaido District Transport Bureau
+- id: tohoku
+  name: Tōhoku
+  summary: "On the wide silver power plate, read the smaller line name and the large pole number beneath it. A number can stand alone or carry an extra letter or directional group."
+  examples:
+    - name: "A line name with a hyphenated suffix"
+      evidence: Utility example
+      code: |-
+        中央線
+        20-A
+      reading: "Combine the name and the large number group as 中央線20-A. Keep the letter and hyphen when transcribing the plate."
+      url: https://nw.tohoku-epco.co.jp/company/facility/gps/
+      source: Tohoku Electric Power Network
+    - name: "A compass character inside a pole number"
+      evidence: Field photo
+      code: |-
+        中町線
+        15北1
+      reading: "The photographed plate in Shimogō, Fukushima shows 北 (north) embedded in the number. Directional codes occur on these wide plates as well as on the tall plates used in Kansai."
+      url: https://www.town.shimogo.fukushima.jp/material/files/group/1/r4_12_toubokudansen_jouhouteikyou.pdf
+      source: Shimogō municipal field photo
+    - name: "A plain number beside an NTT branch code"
+      evidence: Field photo
+      code: |-
+        Power   247
+        NTT     L12 and 15?
+      reading: "The prominent 247 is the power plate’s number. The upper telecom tag appears to show L12 and 15. Read that number separately."
+      url: https://learnablemeta.com/images/nq7AZbAjkorfbqj5pCyfuvgARwitcvt661bN.avif
+      source: LearnableMeta Tōhoku photo
+    - name: "Niigata has horizontal telecom plates too"
+      evidence: Utility example
+      code: |-
+        Horizontal power plate
+        Horizontal NTT plate
+      reading: "NTT East documents both horizontal and vertical telecom plates in Niigata. With two horizontal tags, check for Hokuriku’s four digits, kana and four digits before treating the pair as Hokuriku."
+      url: https://www.ntt-east.co.jp/contact/pdf/miwakekata.pdf#page=1
+      source: NTT East paired-plate photos
+- id: kanto
+  name: Kantō
+  summary: "A common TEPCO layout puts the name across the top and the pole number down the plate. Look for the split in reading direction and the handwritten appearance."
+  examples:
+    - name: "Three handwritten digits stacked below the name"
+      evidence: Field photo
+      code: |-
+        [horizontal name]
+        3
+        4
+        0
+      reading: "The photographed vertical number appears to read 340 from top to bottom. The name above it is a separate field."
+      url: https://learnablemeta.com/images/V24Ktw0ADEuQsjRi3yfS1IsoxpYZuiiGabFi.avif
+      source: LearnableMeta Kantō photo
+    - name: "Name field and pole number"
+      evidence: Utility example
+      code: |-
+        標識      name or marker
+        柱番号    668A
+      reading: "TEPCO separates the name or marker from the pole number. One example shows 668A on the plate itself. The manual also shows leading zeros and a position marker added when entering some numbers into its form."
+      url: https://www.tepco.co.jp/pg/consignment/demand/process/pdf/20250611_guide_pc.pdf?0603=#page=34
+      source: TEPCO Power Grid manual
+    - name: "NTT can also stack branch groups"
+      evidence: Field photo
+      code: |-
+        里見支
+        R1
+        R4
+        15
+      reading: "The Atsugi example is marked NTT. The vertical stack includes multiple R groups, so when the writing runs down the plate, check the operator and the number pattern too."
+      url: https://www.city.atsugi.kanagawa.jp/material/files/group/33/pureeto.pdf
+      source: Atsugi municipal plate photos
+- id: hokuriku
+  name: Hokuriku
+  summary: "Read the upper four digits, a katakana character, and the final four digits. The last four are often shown as two pairs separated by a dot."
+  examples:
+    - name: "The dot separates two digit pairs"
+      evidence: Utility example
+      code: |-
+        0351
+        オ06・00
+      reading: "Hokuriku Electric joins the lines as 0351オ0600. Keep the zeros and kana and omit the printing dot when writing the identifier."
+      url: https://www.rikuden.co.jp/nw_denkikojiten/attach/chat%20manual.pdf
+      source: Hokuriku Electric Power Transmission & Distribution
+    - name: "Two shallow tags with different numbers"
+      evidence: Field photo
+      code: |-
+        Power  7602 / ミ07・16
+        NTT    6 beside the line name
+      reading: "The upper plate reads 7602ミ0716. The lower tag carries the blue NTT mark and a separate large 6."
+      url: https://learnablemeta.com/images/zVy3vKZlIVWL4g8MRJFA40QociyPjMyzIgpD.avif
+      source: LearnableMeta Hokuriku photo
+    - name: "Examples from Toyama"
+      evidence: Location records
+      code: |-
+        0201キ0612  Toyama city
+        3110レ3400  Namerikawa
+      reading: "Both are published pole numbers at Toyama Prefecture sites. Compare the leading digit after identifying the four-digit pattern."
+      url: https://jsite.mhlw.go.jp/toyama-roudoukyoku/content/contents/002486894.pdf
+      source: Toyama Labor Bureau
+    - name: "Examples from Ishikawa"
+      evidence: Location records
+      code: |-
+        4103キ0100  Kanazawa
+        5027ラ4514  Nanao
+        6001ミ1000  Anamizu
+        7508テ1062  Kaga
+      reading: "The leading digits 4 through 7 appear at these Ishikawa sites. These four sites illustrate the spread of leading digits in Ishikawa."
+      url: "https://www.kkj.go.jp/d/?A=aXNoaWthd2EvaXNoaWthd2Ffcm91ZG91a3lva3UvMjAyNS8yMDI1MTEyNl8wMDEzNl8wMi5wZGYK&L=ja"
+      source: Ishikawa Labor Bureau procurement specification
+- id: chubu
+  name: Chūbu
+  summary: "Look for a rounded power plate with two digits and one katakana character across the top, followed by three digits stacked below."
+  examples:
+    - name: "Two digits and kana over three digits"
+      evidence: Utility example
+      code: |-
+        06ス
+        3
+        3
+        6
+      reading: "Join the horizontal group to the vertical digits to get 06ス336. The kana belongs to the pole number."
+      url: https://powergrid.chuden.co.jp/resource/service_solution/hanbai/gaiyou/gaiyou01.pdf#page=1
+      source: Chubu Electric Power Grid leaflet
+    - name: "Paired with an NTT plate"
+      evidence: Utility example
+      code: |-
+        00ア
+        8
+        2
+        3
+      reading: "The Fujieda photo labels this power plate separately from the adjacent NTT plate and reads the number as 00ア823."
+      url: https://www.city.fujieda.shizuoka.jp/material/files/group/134/chuubudenryoku.pdf#page=11
+      source: Chubu Electric Power Grid Fujieda office
+    - name: "A field example with weaker contrast"
+      evidence: Field photo
+      code: |-
+        25 [kana]
+        8
+        0
+        4
+      reading: "The rounded ends and switch from a horizontal group to vertical digits remain visible. The kana in this crop is too soft to transcribe confidently."
+      url: https://learnablemeta.com/images/acWJCMtpcziEUCVVxyWDFghdh4kX7EMGdpko.avif
+      source: LearnableMeta Chūbu photo
+- id: chugoku
+  name: Chūgoku
+  summary: Check the Energia name or a company mark alongside the stacked route and pole-number rows. Chūgoku power plates can use left and right suffixes too.
+  examples:
+    - name: Route, base number, and two branches
+      evidence: Utility example
+      code: |-
+        広島幹
+        100 右1 左2
+      reading: 広島幹 is the route label. Read 100 as the base number, followed by right 1 and left 2. The utility's diagram marks the whole sequence as its power pole number.
+      url: https://www.energia.co.jp/nw/service/pole/web-application/pdf/flow-09.pdf#page=16
+      source: Chūgoku Network plate guide
+    - name: Left suffix on an Energia plate
+      evidence: Field photo
+      code: |-
+        ホリカワ
+        ダンチ　支
+        8
+        左 1
+      reading: The kana runs across two rows. The large 8 is followed by 左1, a left suffix. The faded Energia wordmark ties the suffix to the power plate.
+      url: https://learnablemeta.com/images/1/EaaH9ny7scNDozojGKCgtBjVh9iPuTjdKbeB.avif
+      source: LearnableMeta Chūgoku photo
+    - name: Letter suffix on a larger plate
+      evidence: Utility example
+      code: |-
+        五月支
+        7
+        M1
+      reading: The utility's distribution-pole photo shows the larger-stamped plate with 7 followed by M1. Recognize the letter-number suffix as part of this visible format. Its meaning is unspecified by the photo.
+      url: https://www.energia.co.jp/nw/service/pole/web-application/pdf/flow-09.pdf#page=16
+      source: Chūgoku Network distribution-pole photos
+- id: shikoku
+  name: Shikoku
+  summary: The utility uses a katakana line name of up to seven characters. Its number can combine digits with E, W, S, or N for compass directions and X for an inserted pole. Compare the horizontal kana rows and the power-company mark with the vertical line names common in Kansai.
+  examples:
+    - name: Inserted-pole code
+      evidence: Utility example
+      code: |-
+        イシミ 1X1
+        カダ 2
+      reading: These utility examples show a compound number with X and a simple number without a suffix. Each follows a katakana line name.
+      url: https://www.yonden.co.jp/nw/hdfposition/
+      source: Shikoku utility plate photos
+    - name: Compass suffix below the number
+      evidence: Field photo
+      code: |-
+        2
+        E5
+      reading: Below the logo and kana rows, E5 follows the main 2 on a separate line. Shikoku documents E as east. A compass letter also occurs on a Shikoku power plate.
+      url: https://learnablemeta.com/images/LFkHqF0Z84MKURMdlyela2eTRnOK9vejzXGS.avif
+      source: LearnableMeta Shikoku photo
+    - name: South suffix
+      evidence: Utility example
+      code: サンジョウ 2S6
+      reading: The operator reads this as the line name サンジョウ followed by 2, S, and 6. Its guide identifies S as south and shows both older and newer plates.
+      url: https://www.yonden.co.jp/nw/assets/pdf/bougokan/index/bougokan_abouts.pdf#page=7
+      source: Shikoku utility safety guide
+- id: kyushu
+  name: Kyūshū
+  summary: The utility specifies three digits, one katakana character, and three more digits. Look for three digits across the top and the kana plus the last three digits running down the right.
+  examples:
+    - name: Official seven-character number
+      evidence: Utility example
+      code: 247エ714
+      reading: Group it as 247, エ, and 714. The operator identifies this complete sequence as the power pole number in a photo with a separate NTT plate.
+      url: https://www.kyuden.co.jp/td/dx-business/new-business/location.html
+      source: Kyūshū utility plate photo
+    - name: Split across horizontal and vertical rows
+      evidence: Field photo
+      code: |-
+        607
+         ア
+         7
+         1
+         3
+      reading: The visible grouping reads 607ア713. Smaller numbers appear on the left and bottom too. Their meanings remain unresolved in this photo.
+      url: https://learnablemeta.com/images/fUbXupb5juDyw8MNifB0biL5U3V1Q8Ytdr9Y.avif
+      source: LearnableMeta Kyūshū photo
+    - name: The grid behind the digits
+      evidence: Utility example
+      code: 381タ663
+      reading: The first three digits number a 2 km by 2 km grid square, and the kana identifies its subdivision. The final three record the east–west subdivision, north–south subdivision, and pole-number field within the small cell. Preserve leading zeros in the first group.
+      url: https://www.kyuden-ss.co.jp/bougokan_uketsuke/img/about_bougo20240401.pdf#page=10
+      source: Kyūshū utility safety handbook
+- id: okinawa
+  name: Okinawa
+  summary: Look for 沖縄電力 or 沖電 on the power plates. The operator distinguishes a management ID from a separate line name and line number. All three types of tag can appear together when an NTT plate is present.
+  examples:
+    - name: Ruled rows on a separate tag
+      evidence: Observed reading
+      code: |-
+        2
+        …
+        32
+        …
+        34
+        20
+      reading: The photo shows a leading 2 and several short number groups divided by rules. The marks between them are less clear. Treat the visible rows as a recognition clue and leave the unclear characters undecoded.
+      url: https://learnablemeta.com/images/cgQyGqsIdzD5lXvdANKHmJr1P0BvTH1N1GBD.avif
+      source: LearnableMeta Okinawa photo
+    - name: Two ways the utility identifies a pole
+      evidence: Utility example
+      code: |-
+        42G3370410
+        中央　121分10外4支線
+      reading: The first line is the management ID from the operator's example. The second is the separate line name 中央 and line number 121分10外4支線, with branch markers written among the numerals.
+      url: https://www.okiden.co.jp/shared/pdf/business-support/application_guide/setsumeisyo-kouridenki.pdf#page=22
+      source: Okinawa Electric registration guide
+    - name: Reported island prefixes
+      evidence: Reported field pattern
+      code: 2 · 6 · 7 · 8
+      reading: The linked field collection reports examples with 2 in southern Okinawa main island, 6 in the north, 7 on the Miyako Islands, and 8 in the Yaeyama Islands. Treat this as a field association from the collection.
+      url: https://learnablemeta.com/maps/680147cbf20e4cd18fe321f0
+      source: A Learnable Japan Advanced Meta
